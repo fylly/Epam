@@ -1,0 +1,129 @@
+    class Triangle 
+    {
+        public enum triangleType { none = 0, acute, right, obtuse };
+
+        private float p_a = 0;
+        private float p_b = 0;
+        private float p_c = 0;
+
+        public float a
+        {
+            get
+            {
+                return p_a;
+            }
+            set
+            {
+                isCorrect(value);
+                p_a = value;
+            }            
+        }
+
+        public float b
+        {
+            get
+            {
+                return p_b;
+            }
+            set
+            {
+                isCorrect(value);
+                p_b = value;
+            }
+        }
+
+        public float c
+        {
+            get
+            {
+                return p_c;
+            }
+            set
+            {
+                isCorrect(value);
+                p_c = value;
+            }
+        }
+
+        public Triangle()
+        {
+
+        }
+
+        private void isCorrect(float p_)
+        {
+            if (p_ <= 0)
+            {
+                throw new Exception("Incorrect value");
+            }
+        }
+
+        private void isCorrect(float a_, float b_, float c_)
+        {
+            if ((a_ <= 0) || (b_ <= 0) || (c_ <= 0))
+            {
+                throw new Exception("Incorrect value");
+            }
+        }
+        
+        public bool isExist()
+        {
+            if ((a + b <= c) || (a + c <= b) || (b + c <= a))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private bool isExist(float a_ , float b_, float c_)
+        {
+            if ((a_ + b_ <= c_) || (a_ + c_ <= b_) || (b_ + c_ <= a_))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool createTriangle(float a_, float b_, float c_)
+        {
+            isCorrect(a_, b_, c_);
+            if (isExist(a_, b_, c_))
+            {
+                a = a_;
+                b = b_;
+                c = c_;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public triangleType getTypeTriangle()
+        {
+            if (!isExist())
+            {
+                return triangleType.none;
+            }
+            double cosA = (b * b + c * c - a * a) / (2 * b * c);
+            double cosB = (a * a + c * c - b * b) / (2 * a * c);
+            double cosC = (b * b + a * a - c * c) / (2 * b * a);
+
+            if ((cosA == 0) || (cosB == 0) || (cosC == 0))
+            {
+                return triangleType.right;
+            }
+            else if ((cosA < 0) || (cosB < 0) || (cosC < 0))
+            {
+                return triangleType.obtuse;
+            }
+            return triangleType.acute;
+        }
+    }
