@@ -1,0 +1,55 @@
+    class Item
+    {
+        private string p_name;
+        private int p_number;
+        private int p_cost;
+
+        public Item(string name_, int number_, int cost_)
+        {
+            name = name_;            
+            number = number_;
+            cost = cost_;
+        }
+
+        public string name
+        {
+            get
+            {
+                return p_name;
+            }
+            set
+            {
+                p_name = value;
+            }
+        }
+
+        public int cost
+        {
+            get
+            {
+                return p_cost;
+            }
+            set
+            {
+                p_cost = value;
+            }
+        }
+
+        public int number
+        {
+            get
+            {
+                return p_number;
+            }
+            set
+            {
+                p_number = value;
+            }
+        }
+
+        public int get_summ()
+        {
+            int sum = p_cost * p_number;
+            return sum;
+        }
+    }
