@@ -1,0 +1,5 @@
+D:\!Work\EPAM\Trains\Trains\bin\Debug\Trains.exe
+D:\!Work\EPAM\Trains\Trains\bin\Debug\Trains.pdb
+D:\!Work\EPAM\Trains\Trains\obj\Debug\Trains.csprojResolveAssemblyReference.cache
+D:\!Work\EPAM\Trains\Trains\obj\Debug\Trains.exe
+D:\!Work\EPAM\Trains\Trains\obj\Debug\Trains.pdb
