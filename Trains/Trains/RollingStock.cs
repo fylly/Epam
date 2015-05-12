@@ -56,17 +56,58 @@ namespace ConsoleApplication1
 
         public IEnumerable<ITrainItem> GetCoachItemByNumber(int startNumber, int endNumber)
         {
-            foreach (var i in trainItem)
+            IEnumerable<ITrainItem> coachItemByNumberQuery =
+            from train in trainItem
+            where train is ICoach && (train as ICoach).CoachSeats >= startNumber && (train as ICoach).CoachSeats <= endNumber
+            select train;
+
+            foreach (var i in coachItemByNumberQuery)
             {
-                if (i is ICoach)
-                {
-                    ICoach temp = i as ICoach;
-                    if ((temp.CoachSeats >= startNumber && temp.CoachSeats <= endNumber))
-                    {
-                        yield return i;
-                    }
-                }
+                yield return i;
             }
         }
+
+        public Nullable<Decimal> GetCoachSeatsSum()
+        {
+            Nullable<Decimal> coachSeatsSum =
+            (from train in trainItem
+             where train is ICoach
+             select (train as ICoach).CoachSeats)
+                .Sum();
+
+            return coachSeatsSum;            
+        }
+
+        public Nullable<Decimal> GetBaggageQuantitySum()
+        {
+            Nullable<Decimal> baggageQuantitySum =
+            (from train in trainItem
+             where train is IBaggageCar
+             select (train as IBaggageCar).BaggageQuantity)
+                .Sum();
+
+            return baggageQuantitySum;
+        }
+
+        public IEnumerable<ITrainItem> SortByCoachType()
+        {
+            IEnumerable<ITrainItem> coachItemByNumberQuery =
+
+
+            (from train in trainItem
+             where !(train is ICoach)
+             select train).Concat(
+            from train in trainItem
+            where train is ICoach
+            orderby (train as ICoach).CoachType
+            select train
+            );
+
+            foreach (var i in coachItemByNumberQuery)
+            {
+                yield return i;
+            }
+        }
+
     }
 }
