@@ -67,9 +67,9 @@ namespace ConsoleApplication1
             }
         }
 
-        public Nullable<Decimal> GetCoachSeatsSum()
+        public Nullable<long> GetCoachSeatsSum()
         {
-            Nullable<Decimal> coachSeatsSum =
+            Nullable<long> coachSeatsSum =
             (from train in trainItem
              where train is ICoach
              select (train as ICoach).CoachSeats)
@@ -78,9 +78,9 @@ namespace ConsoleApplication1
             return coachSeatsSum;            
         }
 
-        public Nullable<Decimal> GetBaggageQuantitySum()
+        public Nullable<long> GetBaggageQuantitySum()
         {
-            Nullable<Decimal> baggageQuantitySum =
+            Nullable<long> baggageQuantitySum =
             (from train in trainItem
              where train is IBaggageCar
              select (train as IBaggageCar).BaggageQuantity)
@@ -89,7 +89,7 @@ namespace ConsoleApplication1
             return baggageQuantitySum;
         }
 
-        public IEnumerable<ITrainItem> SortByCoachType()
+        public void SortByCoachType()
         {
             IEnumerable<ITrainItem> coachItemByNumberQuery =
 
@@ -103,10 +103,7 @@ namespace ConsoleApplication1
             select train
             );
 
-            foreach (var i in coachItemByNumberQuery)
-            {
-                yield return i;
-            }
+            trainItem = coachItemByNumberQuery.ToList();
         }
 
     }

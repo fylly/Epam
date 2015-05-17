@@ -7,7 +7,9 @@ namespace ConsoleApplication1
 {
     public abstract class Locomotive : TrainItem, ILocomotive
     {
-        public int speed { get; set; }
+        public int MaxSpeed { get; set; }
+        public double SpeedUp { get; set; }
+
        
     }
 }

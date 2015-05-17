@@ -7,5 +7,6 @@ namespace ConsoleApplication1
 {
     public class Electric : Locomotive
     {
+        public float Voltage { get; set; }
     }
 }

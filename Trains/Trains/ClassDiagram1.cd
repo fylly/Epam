@@ -11,7 +11,7 @@
   <Class Name="ConsoleApplication1.Locomotive">
     <Position X="2.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
       <FileName>Locomotive.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -35,9 +35,10 @@
   <Class Name="ConsoleApplication1.FreightCars">
     <Position X="10" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>FreightCars.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="ConsoleApplication1.BaggageCar">
     <Position X="8.75" Y="5.5" Width="1.5" />
@@ -58,21 +59,21 @@
   <Class Name="ConsoleApplication1.Diesel">
     <Position X="1.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Diesel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ConsoleApplication1.Electric">
     <Position X="3.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Electric.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ConsoleApplication1.RollingStock">
     <Position X="11" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACIAAAAAAAAAABAQAAAABAQBAAAAAAAAAAAAAABQIAA=</HashCode>
+      <HashCode>ACJAAAABAAAAABBQAAAABAQBAAAAAAAAAAACAABQIAA=</HashCode>
       <FileName>RollingStock.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -87,7 +88,7 @@
   <Interface Name="ConsoleApplication1.ILocomotive">
     <Position X="13" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
       <FileName>ILocomotive.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -129,7 +130,7 @@
   <Enum Name="ConsoleApplication1.PassengerCarsType">
     <Position X="21.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAIAAAAAAAAAAAAAAAAAAQA=</HashCode>
       <FileName>PassengerCarsType.cs</FileName>
     </TypeIdentifier>
   </Enum>

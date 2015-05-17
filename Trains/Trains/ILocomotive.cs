@@ -7,6 +7,7 @@ namespace ConsoleApplication1
 {
     public interface ILocomotive : ITrainItem
     {
-        int speed { get; set; }
+        int MaxSpeed { get; }
+        double SpeedUp{ get; }
     }
 }
