@@ -41,26 +41,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaggageCar.cs" />
-    <Compile Include="Coach.cs" />
-    <Compile Include="Diesel.cs" />
-    <Compile Include="DiningCar.cs" />
-    <Compile Include="Electric.cs" />
-    <Compile Include="FreightCars.cs" />
-    <Compile Include="IBaggageCar.cs" />
-    <Compile Include="ICoach.cs" />
-    <Compile Include="IDining.cs" />
-    <Compile Include="IFreightCars.cs" />
-    <Compile Include="ILocomotive.cs" />
-    <Compile Include="IPassengerCars.cs" />
-    <Compile Include="ITrainItem.cs" />
-    <Compile Include="Locomotive.cs" />
-    <Compile Include="PassengerCars.cs" />
-    <Compile Include="PassengerCarsType.cs" />
+    <Compile Include="Trains Classes\BaggageCar.cs" />
+    <Compile Include="Trains Classes\Coach.cs" />
+    <Compile Include="Trains Classes\Diesel.cs" />
+    <Compile Include="Trains Classes\DiningCar.cs" />
+    <Compile Include="Trains Classes\Electric.cs" />
+    <Compile Include="Trains Classes\FreightCars.cs" />
+    <Compile Include="Interfaces\IBaggageCar.cs" />
+    <Compile Include="Interfaces\ICoach.cs" />
+    <Compile Include="Interfaces\IDining.cs" />
+    <Compile Include="Interfaces\IFreightCars.cs" />
+    <Compile Include="Interfaces\ILocomotive.cs" />
+    <Compile Include="Interfaces\IPassengerCars.cs" />
+    <Compile Include="Interfaces\ITrainItem.cs" />
+    <Compile Include="Trains Classes\Locomotive.cs" />
+    <Compile Include="Trains Classes\PassengerCars.cs" />
+    <Compile Include="Trains Classes\PassengerCarsType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RollingStock.cs" />
-    <Compile Include="TrainItem.cs" />
+    <Compile Include="Trains Classes\TrainItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
