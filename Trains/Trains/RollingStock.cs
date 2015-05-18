@@ -145,10 +145,8 @@ namespace ConsoleApplication1
             where train is ICoach && (train as ICoach).CoachSeats >= startNumber && (train as ICoach).CoachSeats <= endNumber
             select train;
 
-            foreach (var i in coachItemByNumberQuery)
-            {
-                yield return i;
-            }
+            return coachItemByNumberQuery.ToList();
+                        
         }
 
         public Nullable<long> GetCoachSeatsSum()
