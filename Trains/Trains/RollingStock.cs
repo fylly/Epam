@@ -49,7 +49,6 @@ namespace ConsoleApplication1
              where train is IFreightCars
              select train)
                 .Count();
-
             return freightCarsCount;
         }
 
