@@ -38,6 +38,13 @@ namespace ConsoleApplication1
                 CoachType = PassengerCarsType.First
             });
 
+/*            rollingStock.Add(new FreightCars()
+            {
+                Model = "Diesel E56",
+                BuildDate = new DateTime(2010, 5, 12),
+                Weight = 3000
+            });
+            */
             foreach (var i in rollingStock)
             {
                 Console.WriteLine("{0}, {1}", i.Model, i.Builder);

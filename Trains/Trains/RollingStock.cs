@@ -9,9 +9,93 @@ namespace ConsoleApplication1
     {
         ICollection<ITrainItem> trainItem = new List<ITrainItem>();
 
+        private Nullable<long> GetWagonCount()
+        {
+            Nullable<long> wagonCount =
+            (from train in trainItem
+             where !(train is ILocomotive)
+             select train)
+                .Count();
+
+            return wagonCount;
+        }
+
+        private Nullable<long> GetLocomotiveCount()
+        {
+            Nullable<long> passengerCarsCount =
+            (from train in trainItem
+             where train is ILocomotive
+             select train)
+                .Count();
+
+            return passengerCarsCount;
+        }
+
+        private Nullable<long> GetPassengerCarsCount()
+        {
+            Nullable<long> passengerCarsCount =
+            (from train in trainItem
+             where train is IPassengerCars
+             select train)
+                .Count();
+
+            return passengerCarsCount;
+        }
+
+        private Nullable<long> GetFreightCarsCount()
+        {
+            Nullable<long> freightCarsCount =
+            (from train in trainItem
+             where train is IFreightCars
+             select train)
+                .Count();
+
+            return freightCarsCount;
+        }
+
         public void Add(ITrainItem item)
         {
-            trainItem.Add(item);
+            if (item is ILocomotive)
+            {
+                if (GetWagonCount() == 0)
+                {
+                    trainItem.Add(item);
+                }
+                else
+                {
+                    throw new System.ArgumentException();
+                }
+            }
+            else if (item is IPassengerCars)
+            {
+                if ((GetLocomotiveCount() >0 ) && ((GetWagonCount() == 0) || (GetPassengerCarsCount() > 0)))
+                {
+                    trainItem.Add(item);
+                }
+                else
+                {
+                    throw new System.ArgumentException();
+                }
+            }
+            else if (item is IFreightCars)
+            {
+                if ((GetLocomotiveCount() >0 ) && ((GetWagonCount() == 0) || (GetFreightCarsCount() > 0)))
+                {
+                    Console.WriteLine("{0},{1}", GetWagonCount().ToString(), GetFreightCarsCount().ToString());
+                    trainItem.Add(item);
+                }
+                else
+                {
+                    throw new System.ArgumentException();
+                }
+            }
+            else 
+            {
+                throw new System.ArgumentException();
+            }
+    
+            
+        
         }
 
         public void Clear()
