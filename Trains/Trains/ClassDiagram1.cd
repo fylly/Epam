@@ -4,7 +4,7 @@
     <Position X="6" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAEAAAAAAAAgAACAAAAAAAAgAAAAAAAA=</HashCode>
-      <FileName>TrainItem.cs</FileName>
+      <FileName>Trains Classes\TrainItem.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -12,7 +12,7 @@
     <Position X="2.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
-      <FileName>Locomotive.cs</FileName>
+      <FileName>Trains Classes\Locomotive.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -20,7 +20,7 @@
     <Position X="5.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Coach.cs</FileName>
+      <FileName>Trains Classes\Coach.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -28,7 +28,7 @@
     <Position X="6.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>PassengerCars.cs</FileName>
+      <FileName>Trains Classes\PassengerCars.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -36,7 +36,7 @@
     <Position X="11" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>FreightCars.cs</FileName>
+      <FileName>Trains Classes\FreightCars.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -52,7 +52,7 @@
     <Position X="7" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>DiningCar.cs</FileName>
+      <FileName>Trains Classes\DiningCar.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -60,20 +60,20 @@
     <Position X="1.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Diesel.cs</FileName>
+      <FileName>Trains Classes\Diesel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ConsoleApplication1.Electric">
     <Position X="3.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Electric.cs</FileName>
+      <FileName>Trains Classes\Electric.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ConsoleApplication1.RollingStock">
     <Position X="13" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACJAAAABAAAAABBQAAAAJAQBAAAIAAAAEQACAABQIAA=</HashCode>
+      <HashCode>ACJAAAABAAAAABBQAAAALAQAAAAIAAAAEQACAABQIAA=</HashCode>
       <FileName>RollingStock.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -82,56 +82,56 @@
     <Position X="18" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAEAAAAAAAAgAACAAAAAAAAgAAAAAAAA=</HashCode>
-      <FileName>ITrainItem.cs</FileName>
+      <FileName>Interfaces\ITrainItem.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="ConsoleApplication1.ILocomotive">
     <Position X="13" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
-      <FileName>ILocomotive.cs</FileName>
+      <FileName>Interfaces\ILocomotive.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="ConsoleApplication1.IPassengerCars">
     <Position X="17" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>IPassengerCars.cs</FileName>
+      <FileName>Interfaces\IPassengerCars.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="ConsoleApplication1.ICoach">
     <Position X="15.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ICoach.cs</FileName>
+      <FileName>Interfaces\ICoach.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="ConsoleApplication1.IDining">
     <Position X="17.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>IDining.cs</FileName>
+      <FileName>Interfaces\IDining.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="ConsoleApplication1.IBaggageCar">
     <Position X="19" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>IBaggageCar.cs</FileName>
+      <FileName>Interfaces\IBaggageCar.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="ConsoleApplication1.IFreightCars">
     <Position X="21.5" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>IFreightCars.cs</FileName>
+      <FileName>Interfaces\IFreightCars.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="ConsoleApplication1.PassengerCarsType">
     <Position X="21.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAQAAAAAAAAIAAAAAAAAAAAAAAAAAAQA=</HashCode>
-      <FileName>PassengerCarsType.cs</FileName>
+      <FileName>Trains Classes\PassengerCarsType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />
