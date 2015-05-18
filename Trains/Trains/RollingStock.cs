@@ -7,12 +7,12 @@ namespace ConsoleApplication1
 {
     public class RollingStock : ICollection<ITrainItem>
     {
-        private ICollection<ITrainItem> _trainItem = new List<ITrainItem>();
+        ICollection<ITrainItem> trainItem = new List<ITrainItem>();
 
         private Nullable<long> GetWagonCount()
         {
             Nullable<long> wagonCount =
-            (from train in _trainItem
+            (from train in trainItem
              where !(train is ILocomotive)
              select train)
                 .Count();
@@ -23,7 +23,7 @@ namespace ConsoleApplication1
         private Nullable<long> GetLocomotiveCount()
         {
             Nullable<long> passengerCarsCount =
-            (from train in _trainItem
+            (from train in trainItem
              where train is ILocomotive
              select train)
                 .Count();
@@ -34,7 +34,7 @@ namespace ConsoleApplication1
         private Nullable<long> GetPassengerCarsCount()
         {
             Nullable<long> passengerCarsCount =
-            (from train in _trainItem
+            (from train in trainItem
              where train is IPassengerCars
              select train)
                 .Count();
@@ -45,7 +45,7 @@ namespace ConsoleApplication1
         private Nullable<long> GetFreightCarsCount()
         {
             Nullable<long> freightCarsCount =
-            (from train in _trainItem
+            (from train in trainItem
              where train is IFreightCars
              select train)
                 .Count();
@@ -59,7 +59,7 @@ namespace ConsoleApplication1
             {
                 if (GetWagonCount() == 0)
                 {
-                    _trainItem.Add(item);
+                    trainItem.Add(item);
                 }
                 else
                 {
@@ -70,7 +70,7 @@ namespace ConsoleApplication1
             {
                 if ((GetLocomotiveCount() >0 ) && ((GetWagonCount() == 0) || (GetPassengerCarsCount() > 0)))
                 {
-                    _trainItem.Add(item);
+                    trainItem.Add(item);
                 }
                 else
                 {
@@ -82,7 +82,7 @@ namespace ConsoleApplication1
                 if ((GetLocomotiveCount() >0 ) && ((GetWagonCount() == 0) || (GetFreightCarsCount() > 0)))
                 {
                     Console.WriteLine("{0},{1}", GetWagonCount().ToString(), GetFreightCarsCount().ToString());
-                    _trainItem.Add(item);
+                    trainItem.Add(item);
                 }
                 else
                 {
@@ -100,37 +100,37 @@ namespace ConsoleApplication1
 
         public void Clear()
         {
-            _trainItem.Clear();
+            trainItem.Clear();
         }
 
         public bool Contains(ITrainItem item)
         {
-            return _trainItem.Contains(item);
+            return trainItem.Contains(item);
         }
 
         public void CopyTo(ITrainItem[] array, int arrayIndex)
         {
-            _trainItem.CopyTo(array, arrayIndex);
+            trainItem.CopyTo(array, arrayIndex);
         }
 
         public int Count
         {
-            get { return _trainItem.Count; }
+            get { return trainItem.Count; }
         }
 
         public bool IsReadOnly
         {
-            get { return _trainItem.IsReadOnly; }
+            get { return trainItem.IsReadOnly; }
         }
 
         public bool Remove(ITrainItem item)
         {
-            return _trainItem.Remove(item);
+            return trainItem.Remove(item);
         }
 
         public IEnumerator<ITrainItem> GetEnumerator()
         {
-            return _trainItem.GetEnumerator();
+            return trainItem.GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -141,7 +141,7 @@ namespace ConsoleApplication1
         public IEnumerable<ITrainItem> GetCoachItemByNumber(int startNumber, int endNumber)
         {
             IEnumerable<ITrainItem> coachItemByNumberQuery =
-            from train in _trainItem
+            from train in trainItem
             where train is ICoach && (train as ICoach).CoachSeats >= startNumber && (train as ICoach).CoachSeats <= endNumber
             select train;
 
@@ -152,9 +152,9 @@ namespace ConsoleApplication1
         public Nullable<long> GetCoachSeatsSum()
         {
             Nullable<long> coachSeatsSum =
-            (from train in _trainItem
+            (from train in trainItem
              where train is ICoach
-             select ((ICoach)train).CoachSeats)
+             select (train as ICoach).CoachSeats)
                 .Sum();
 
             return coachSeatsSum;            
@@ -163,9 +163,9 @@ namespace ConsoleApplication1
         public Nullable<long> GetBaggageQuantitySum()
         {
             Nullable<long> baggageQuantitySum =
-            (from train in _trainItem
+            (from train in trainItem
              where train is IBaggageCar
-             select ((IBaggageCar)train).BaggageQuantity)
+             select (train as IBaggageCar).BaggageQuantity)
                 .Sum();
 
             return baggageQuantitySum;
@@ -176,16 +176,16 @@ namespace ConsoleApplication1
             IEnumerable<ITrainItem> coachItemByNumberQuery =
 
 
-            (from train in _trainItem
+            (from train in trainItem
              where !(train is ICoach)
              select train).Concat(
-            from train in _trainItem
+            from train in trainItem
             where train is ICoach
-            orderby ((ICoach)train).CoachType
+            orderby (train as ICoach).CoachType
             select train
             );
 
-            _trainItem = coachItemByNumberQuery.ToList();
+            trainItem = coachItemByNumberQuery.ToList();
         }
 
     }
