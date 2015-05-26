@@ -20,7 +20,7 @@ namespace CP2___t1
             {
                 StreamReader sr=new StreamReader(_pathIn);
                 while (!sr.EndOfStream)
-                {
+                {                    
                     wordsCollection.Add(new WordsLine(sr.ReadLine(),_seperator));
                 }
                 sr.Close();

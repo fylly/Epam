@@ -11,26 +11,27 @@ namespace CP2___t1
 
         private IEnumerable<String> GetCurrentWords(IEnumerable<String> item)
         {
-            return item.Where(x => x.Length > 0)
-                .Select(y=>y.ToLower());
+            return item.Where(x => (x != null) && (x.Length > 0));
         }
              
         public Nullable<int> GetWordsCount(String item)
         {
-           return _words.Where(x=>x.CompareTo(item)==0)
+           return _words.Where(x=>String.Compare(x,item,true)==0) 
                .Count();
         }
 
         // Constructors
         #region Constructors
         public WordsLine(string[] item)
-        {
-            _words = GetCurrentWords(item).ToList();
+        {            
+                _words = GetCurrentWords(item).ToList();            
         }
 
         public WordsLine(string item, char[] separator)
-        {
-            _words = GetCurrentWords(item.Split(separator)).ToList();
+        {            
+                _words = item
+                    .Split(separator, StringSplitOptions.RemoveEmptyEntries)
+                    .ToList();            
         }
         #endregion
 
@@ -38,11 +39,12 @@ namespace CP2___t1
         #region Standart
         public void Add(string item)
         {
-            if (item.Length > 0)
+            if ((item != null) && (item.Length > 0))
             {
                 _words.Add(item);
             }
         }
+
 
         public void Clear()
         {
@@ -51,7 +53,7 @@ namespace CP2___t1
 
         public bool Contains(string item)
         {
-            return _words.Contains(item);
+            return _words.Contains(item.ToLower());
         }
 
         public void CopyTo(string[] array, int arrayIndex)

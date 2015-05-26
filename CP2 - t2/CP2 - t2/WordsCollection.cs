@@ -17,7 +17,7 @@ namespace CP2___t1
         public IEnumerable<String> GetSingleOrderWords()
         {
             return _lines.SelectMany(x => x)
-                .GroupBy(x=>x)
+                .GroupBy(x=>x.ToLower())
                 .Select(x=>x.Key)
                 .OrderBy(x=>x);
         }
