@@ -9,8 +9,8 @@ namespace CP2___t1
     class Program
     {
         private static char [] _seperator = { ' ', '.','?',','};
-        private static String _pathIn = @"D:\MyFilesIn.txt";
-        private static String _pathOut = @"D:\MyFilesOut.txt";
+        private static String _pathIn = @"D:\MyFileIn.txt";
+        private static String _pathOut = @"D:\MyFileOut.txt";
 
         static void Main(string[] args)
         {

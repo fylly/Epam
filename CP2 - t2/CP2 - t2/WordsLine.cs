@@ -11,7 +11,7 @@ namespace CP2___t1
 
         private IEnumerable<String> GetCurrentWords(IEnumerable<String> item)
         {
-            return item.Where(x => (x != null) && (x.Length > 0));
+            return item.Where(x => !string.IsNullOrEmpty(x));
         }
              
         public Nullable<int> GetWordsCount(String item)
@@ -39,7 +39,7 @@ namespace CP2___t1
         #region Standart
         public void Add(string item)
         {
-            if ((item != null) && (item.Length > 0))
+            if (!string.IsNullOrEmpty(item))
             {
                 _words.Add(item);
             }
