@@ -22,17 +22,11 @@ namespace CP2___t1
 
         // Constructors
         #region Constructors
-        public WordsLine(string[] item)
+        public WordsLine(IEnumerable<String> item)
         {            
-                _words = GetCurrentWords(item).ToList();            
+            _words = GetCurrentWords(item).ToList();            
         }
 
-        public WordsLine(string item, char[] separator)
-        {            
-                _words = item
-                    .Split(separator, StringSplitOptions.RemoveEmptyEntries)
-                    .ToList();            
-        }
         #endregion
 
         // Standard methods of ICollection
