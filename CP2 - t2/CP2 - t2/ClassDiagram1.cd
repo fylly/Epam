@@ -4,7 +4,7 @@
     <Position X="2" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACIAAgAAAAAAABAQAAAJBAQAAAAAAAAAAAAAAABSIAA=</HashCode>
-      <FileName>WordsCollection.cs</FileName>
+      <FileName>Classes\WordsCollection.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -12,15 +12,15 @@
     <Position X="4" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACIAAAAAAAAAABAQAAAABAQAAAAAAgAQAABAAABQIAA=</HashCode>
-      <FileName>WordsLine.cs</FileName>
+      <FileName>Classes\WordsLine.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="CP2___t1.LineBuilder">
-    <Position X="7" Y="1.25" Width="1.5" />
+    <Position X="6.25" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>LineBuilder.cs</FileName>
+      <FileName>Classes\LineBuilder.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

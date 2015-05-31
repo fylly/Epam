@@ -41,11 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LineBuilder.cs" />
+    <Compile Include="Classes\LineBuilder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WordsCollection.cs" />
-    <Compile Include="WordsLine.cs" />
+    <Compile Include="Classes\WordsCollection.cs" />
+    <Compile Include="Classes\WordsLine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

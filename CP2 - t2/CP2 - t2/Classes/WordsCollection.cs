@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 
 namespace CP2___t1
 {
@@ -14,14 +14,14 @@ namespace CP2___t1
             return _lines.Select(x =>x.GetWordsCount(item)).Sum();
         }
 
-        public IEnumerable<String> GetSingleOrderWords()
+        public IEnumerable<IGrouping<char,String>> GetSingleOrderWords()
         {
-            return _lines.SelectMany(x => x)
-                .GroupBy(x=>x.ToLower())
-                .Select(x=>x.Key)
-                .OrderBy(x=>x);
+             return _lines.SelectMany(x => x.Select(y=>y.ToLower()))
+                .Distinct()
+                .OrderBy(x=>x)
+                .GroupBy(x=>x.ToLower()[0]);
         }
-
+        
         public IEnumerable <int> GetPositionsWord(String item)
         {            
             int n=1;
@@ -58,7 +58,7 @@ namespace CP2___t1
 
         public bool IsReadOnly
         {
-            get { throw new NotImplementedException(); }
+            get { return _lines.IsReadOnly; }
         }
 
         public bool Remove(WordsLine item)

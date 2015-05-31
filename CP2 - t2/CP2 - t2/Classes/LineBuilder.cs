@@ -12,8 +12,7 @@ namespace CP2___t1
             if (item == null || separator == null)
             {
                 throw new NotImplementedException();
-            }
-                
+            }                
             return item
                 .Split(separator, StringSplitOptions.RemoveEmptyEntries);
         }

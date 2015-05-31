@@ -1,30 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CP2___t1
 {
     public class WordsLine : ICollection<String>
     {
         private ICollection<String> _words = new List<String>();
-
-        private IEnumerable<String> GetCurrentWords(IEnumerable<String> item)
-        {
-            return item.Where(x => !string.IsNullOrEmpty(x));
-        }
-             
+        
         public Nullable<int> GetWordsCount(String item)
         {
-           return _words.Where(x=>String.Compare(x,item,true)==0) 
-               .Count();
+           return _words 
+               .Count(x=>String.Compare(x,item,true)==0);
         }
 
         // Constructors
         #region Constructors
         public WordsLine(IEnumerable<String> item)
         {            
-            _words = GetCurrentWords(item).ToList();            
+            _words = item.ToList();            
         }
 
         #endregion
