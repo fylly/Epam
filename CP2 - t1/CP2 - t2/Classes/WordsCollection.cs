@@ -21,8 +21,8 @@ namespace CP2___t1
         // return question WordsLines where words have a predetermined length
         public IEnumerable<WordsLine> GetWordsInQuestionLines(int itemLength)
         {
-            return _lines.Where(x => x.Last().Item == "?") 
-                .Select(x => new WordsLine(x.OfType<IWord>().Where(y => y.Length() == itemLength).Distinct())); // !!! rewrite .Distinct()
+            return _lines.Where(x => x.Last().Item == "?")
+                .Select(x => new WordsLine(x.OfType<IWord>().Where(y => y.Length() == itemLength).Distinct(new WordComparer()))); 
         }
 
         // return WordsLines without the words having a predetermined length and starts at  a predetermined character

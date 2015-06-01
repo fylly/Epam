@@ -46,6 +46,7 @@
     <Compile Include="Interfaces\ISentenceItem.cs" />
     <Compile Include="Interfaces\IWord.cs" />
     <Compile Include="Interfaces\IWordsLine.cs" />
+    <Compile Include="WordComparer.cs" />
     <Compile Include="LinesBuilder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
