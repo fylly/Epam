@@ -73,8 +73,16 @@
   <Class Name="ConsoleApplication1.RollingStock">
     <Position X="13" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACJAAAABAAAAABBQAAAALAQAAAAIAAAAEQACAABQIAA=</HashCode>
+      <HashCode>ACJAAAABAAAAABBQAAAQLAQAAAAIAAAAEQACAABQIAA=</HashCode>
       <FileName>RollingStock.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleApplication1.TrainItemComparerBySeatsCount">
+    <Position X="10.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>TrainItemComparerBySeatsCount.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>

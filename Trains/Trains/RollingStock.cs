@@ -141,7 +141,7 @@ namespace ConsoleApplication1
         {
             IEnumerable<ITrainItem> coachItemByNumberQuery =
             from train in _trainItem
-            where train is ICoach && (train as ICoach).CoachSeats >= startNumber && (train as ICoach).CoachSeats <= endNumber
+            where train is ICoach && ((ICoach) train).CoachSeats >= startNumber && ((ICoach)train).CoachSeats <= endNumber
             select train;
 
             return coachItemByNumberQuery.ToList();
@@ -185,6 +185,13 @@ namespace ConsoleApplication1
             );
 
             return coachItemByNumberQuery.ToList();
+
+         }
+        public IEnumerable<ITrainItem> Sort(IComparer<ITrainItem> comparer)
+        {
+            var newList = _trainItem.ToList();
+                newList.Sort(comparer);
+            return newList;
         }
 
     }

@@ -36,7 +36,31 @@ namespace ConsoleApplication1
                     CoachSeats = 45,
                     BaggageQuantity = 111,
                     CoachType = PassengerCarsType.First
-                }
+                },                        
+                new Coach()
+                {
+                    Model = "Coach C609",
+                    BuildDate = new DateTime(2005, 1, 19),
+                    Weight = 2000,
+                    CoachSeats = 38,
+                    CoachType = PassengerCarsType.First
+                },
+                new BaggageCar()
+                {
+                    Model = "Baggage B610",
+                    BuildDate = new DateTime(2010, 4, 1),
+                    Weight = 2000,                
+                    CoachSeats = 45,
+                    BaggageQuantity = 111,
+                    CoachType = PassengerCarsType.Third
+                },
+                new DiningCar() 
+                {
+                    Model = "Dining E57",
+                    BuildDate = new DateTime(2010,5,12),
+                    DeanerSeats = 20,
+                    Weight = 3000
+                },
             };
 
             foreach (var i in rollingStock)
@@ -57,7 +81,7 @@ namespace ConsoleApplication1
             Console.WriteLine("{0}", rollingStock.GetBaggageQuantitySum());
 
             Console.WriteLine("\n SortByCoachType()");           
-            foreach (var i in rollingStock.SortByCoachType())
+            foreach (var i in rollingStock.Sort(new TrainItemComparerBySeatsCount()))
             {
                 Console.WriteLine("{0}, {1}", i.Model, i.Builder);
             }

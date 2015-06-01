@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaggageCar.cs" />
+    <Compile Include="TrainItemComparerBySeatsCount.cs" />
     <Compile Include="Trains Classes\Coach.cs" />
     <Compile Include="Trains Classes\Diesel.cs" />
     <Compile Include="Trains Classes\DiningCar.cs" />
