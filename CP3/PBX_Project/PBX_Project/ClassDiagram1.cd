@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PBX_Project.PBX">
+    <Position X="1.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACIAAAAAAAgAABAQAAAABAQAAAAAAAAAAAAAAABQIAA=</HashCode>
+      <FileName>PBX.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PBX_Project.PBXPort">
+    <Position X="3.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAIIAAAAQBACAAAAABAAAAAA=</HashCode>
+      <FileName>PBXPort.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PBX_Project.PBXUser">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PBXUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PBX_Project.PBXTerminal">
+    <Position X="5.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBAAAAAA=</HashCode>
+      <FileName>PBXTerminal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PBX_Project.CallingEventArgs">
+    <Position X="9" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>CallingEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="PBX_Project.PhoneNumber">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PhoneNumber.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="PBX_Project.TerminalState">
+    <Position X="13.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TerminalState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PBX_Project.PortState">
+    <Position X="15" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQBAAAAAAAAACAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PortState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
