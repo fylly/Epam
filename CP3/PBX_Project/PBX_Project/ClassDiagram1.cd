@@ -3,7 +3,7 @@
   <Class Name="PBX_Project.PBX">
     <Position X="1.5" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACIAAAAAAAgAABAQAAAABAQAAAAAAAAAAAAAAABQIAA=</HashCode>
+      <HashCode>ACIAQAAAAAgAABASAAAABAQEAAAAAAAAAAAAAABQIIA=</HashCode>
       <FileName>PBX.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -11,7 +11,7 @@
   <Class Name="PBX_Project.PBXPort">
     <Position X="3.5" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAEAAAAAAIIAAAAQBACAAAAABAAAAAA=</HashCode>
+      <HashCode>QAAAAAAQAAAQAAEAAAAACAIAIEAABACAAAAABAAAAAA=</HashCode>
       <FileName>PBXPort.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -25,7 +25,7 @@
   <Class Name="PBX_Project.PBXTerminal">
     <Position X="5.5" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBAAAAAA=</HashCode>
+      <HashCode>AAAAJAAQAAAABAAAAAAACAAAAAAAAAAAAAAEBAAAAAA=</HashCode>
       <FileName>PBXTerminal.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -35,6 +35,28 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAQAAAAAAAAAAA=</HashCode>
       <FileName>CallingEventArgs.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="PBX_Project.PortConnectingToEventArgs">
+    <Position X="10.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAACAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>PortConnectingToEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PBX_Project.ActiveRing">
+    <Position X="19.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAACBAAAAAA=</HashCode>
+      <FileName>ActiveRing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PBX_Project.ActiveRingsCollection">
+    <Position X="18" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACIAAAAAAABAABAQAAAABAQAAAAAAAAAAAAAAABQIAA=</HashCode>
+      <FileName>ActiveRingsCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Struct Name="PBX_Project.PhoneNumber">
     <Position X="9" Y="0.5" Width="1.5" />
@@ -46,14 +68,14 @@
   <Enum Name="PBX_Project.TerminalState">
     <Position X="13.25" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAQBAAAAAAAAACAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TerminalState.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="PBX_Project.PortState">
     <Position X="15" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAQBAAAAAAAAACAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAABAAAAAAAAACAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PortState.cs</FileName>
     </TypeIdentifier>
   </Enum>

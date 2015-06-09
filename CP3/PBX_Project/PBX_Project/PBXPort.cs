@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 
 namespace PBX_Project
@@ -9,8 +10,16 @@ namespace PBX_Project
     {
         private PBXUser _pbxUser;
         private PBXTerminal _pbxTerminal;
+        private PortState _state;
 
-        public PortState State { get; set; }
+        public PhoneNumber phoneNumber { get; set; }
+
+        public PortState State {
+            get
+            {
+                return _state;
+            }
+        }
 
         public PBXUser PbxUser {
             get { return _pbxUser; }
@@ -31,23 +40,76 @@ namespace PBX_Project
                 {
                     _pbxTerminal = value;
                     _pbxTerminal.Calling += c_Calling;
-                    _pbxTerminal.Resetting += c_Resetting;
+                    _pbxTerminal.EndedCall += c_EndedCall;
                 }
             }
         }
         
-        void c_Calling(object sender, CallingEventArgs e)
+         // Constructor
+        public PBXPort()
         {
-            Console.WriteLine("1111");
+            _state = PortState.Available;
         }
 
-        void c_Resetting(object sender, CallingEventArgs e)
+        // Metods
+        public bool Ring()
         {
-            if (State != PortState.Disabled)
+            if (State == PortState.Available)
             {
-                State = PortState.Available;
+                if (_pbxTerminal.Ring())
+                {
+                    _state = PortState.Busy;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
             }
         }
 
+        public void Disconnect()
+        {
+            if (State != PortState.Disabled)
+            {
+               _state = PortState.Available;
+                PbxTerminal.Disconnect();
+            }
+        }
+
+        // Delegates
+        void c_Calling(object sender, CallingEventArgs e)
+        {
+            if (sender != null && e != null && State == PortState.Available)
+            {
+                PortConnectingToEventArgs portConnectingToEventArgs = new PortConnectingToEventArgs();
+                portConnectingToEventArgs.PhoneNumberArg = e.PhoneNumberArg;
+                portConnectingToEventArgs.TerminalStateArg = e.TerminalStateArg; 
+                portConnectingToEventArgs.PortStateArg = State;
+
+                ConnectingTo(this, portConnectingToEventArgs);
+
+                _state = portConnectingToEventArgs.PortStateArg;
+                e.TerminalStateArg = portConnectingToEventArgs.TerminalStateArg;
+            }
+            
+        }
+
+        void c_EndedCall(object sender, CallingEventArgs e)
+        {
+            if (State != PortState.Disabled)
+            {
+                EndedCall(this,new PortConnectingToEventArgs());
+                _state = PortState.Available;
+            }
+        }
+
+        // Events
+        public event EventHandler<PortConnectingToEventArgs> ConnectingTo;
+        public event EventHandler<PortConnectingToEventArgs> EndedCall;
     }
 }
