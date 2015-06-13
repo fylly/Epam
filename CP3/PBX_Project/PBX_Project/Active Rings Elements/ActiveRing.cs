@@ -10,36 +10,36 @@ namespace PBX_Project
         private PhoneNumberStruct _phoneSource;
         private PhoneNumberStruct _phoneDestination;
         private ActiveRingState _state;
+        private DateTime _ringTime;
 
-        public ActiveRing(PhoneNumberStruct source, PhoneNumberStruct destination)
+        public ActiveRing(PhoneNumberStruct source, PhoneNumberStruct destination, DateTime ringTime)
         {
             _phoneSource = source;
             _phoneDestination = destination;
+            _ringTime = ringTime;
             _state = ActiveRingState.Ring;
         }
 
         public PhoneNumberStruct PhoneSource 
         { 
-            get
-            {  
-                return _phoneSource; 
-            } 
+            get { return _phoneSource; } 
         }
 
         public PhoneNumberStruct PhoneDestination
         {
-            get
-            {
-                return _phoneDestination;
-            }
+            get { return _phoneDestination; }
         } 
 
         public ActiveRingState State
         {
-            get
-            {
-                return _state;
-            }
+            set { _state = value; }
+            get { return _state; }
+        }
+
+        public DateTime RingTime
+        {
+            set { _ringTime = value; }
+            get { return _ringTime; }
         }
 
         // Methods
@@ -62,13 +62,16 @@ namespace PBX_Project
             {
                 return PhoneDestination;
             }
-            else if(PhoneDestination == item)
-            {
-                return PhoneSource;
-            }
             else
             {
-                return new PhoneNumberStruct();
+                if (PhoneDestination == item)
+                {
+                    return PhoneSource;
+                }
+                else
+                {
+                    return new PhoneNumberStruct();
+                }
             }
         }    
     }

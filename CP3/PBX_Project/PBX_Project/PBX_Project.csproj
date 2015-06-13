@@ -45,10 +45,13 @@
     <Compile Include="Active Rings Elements\ActiveRingsCollection.cs" />
     <Compile Include="Active Rings Elements\ActiveRingState.cs" />
     <Compile Include="BillingSystem.cs" />
+    <Compile Include="CallStatistics.cs" />
+    <Compile Include="CallStatisticsItem.cs" />
     <Compile Include="Event Args Classes\CallingEventArgs.cs" />
+    <Compile Include="IBillingType.cs" />
     <Compile Include="PBX Classes\PBX.cs" />
     <Compile Include="PBX Classes\PBXTerminal.cs" />
-    <Compile Include="PBXUser.cs" />
+    <Compile Include="Client.cs" />
     <Compile Include="PBX Classes\PBXPort.cs" />
     <Compile Include="PBX Classes\PhoneNumber.cs" />
     <Compile Include="Event Args Classes\PortConnectingToEventArgs.cs" />
@@ -56,6 +59,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PBX Classes\TerminalState.cs" />
+    <Compile Include="TariffStandart.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

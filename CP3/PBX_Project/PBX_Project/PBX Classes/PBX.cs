@@ -9,12 +9,15 @@ namespace PBX_Project
     {
         private ICollection<PBXPort> _pbxPorts = new List <PBXPort> ();
         private ActiveRingsCollection _activeRings = new ActiveRingsCollection();
+        private BillingSystem _billingSystem = new BillingSystem();
 
-        public void AddPort(PBXPort item)
+        public void AddPort(PBXPort item, String name, IBillingType billing )
         {
             _pbxPorts.Add(item);
             _pbxPorts.Last().ConnectingTo += ConnectingToHandler;
             _pbxPorts.Last().EndedCall += EndedCallHandler;
+
+            _billingSystem.AddClient(new Client(item.PhoneNumber, name, billing));
         }
         
         public IEnumerable <PBXPort> GetPorts()
@@ -104,10 +107,10 @@ namespace PBX_Project
 
                     _activeRings.Add(new ActiveRing(
                         firstNumber,
-                        e.PhoneNumberArg));
+                        e.PhoneNumberArg,
+                        System.DateTime.Now));
                 };
             }
-
         }
 
         void EndedCallHandler(object sender, PortConnectingToEventArgs e)
@@ -117,9 +120,22 @@ namespace PBX_Project
                 var firstNumber = ((PBXPort) sender).PhoneNumber;
                 var secondNumber = _activeRings.GetSecondNumberByNumber(firstNumber);
                 Disconnect(secondNumber);
+                
+                var activeRing = _activeRings.GetActiveRingByNumber(firstNumber);
+                if (activeRing != null)
+                {
+                    _billingSystem.AddCallStatistics(activeRing.PhoneSource, activeRing.PhoneDestination,activeRing.RingTime, System.DateTime.Now);
+                }
+                
                 _activeRings.DeleteByPhoneNumber(firstNumber);
+
+                Console.WriteLine("---------------------");
+                foreach (var i in _billingSystem.GetStatistics())
+                {
+                    Console.WriteLine("{0} - {1} - {2} - {3} - {4}",i.PhoneSource.Number,i.PhoneDestination.Number,i.StartTimeCall, i.FinishTimeCall, i.BillingType.Tariff);
+                }
+                Console.WriteLine("---------------------");
             }
-            
         }
         #endregion
     }

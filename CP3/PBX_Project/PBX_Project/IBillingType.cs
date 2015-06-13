@@ -5,9 +5,10 @@ using System.Text;
 
 namespace PBX_Project
 {
-    public class PBXUser
+    public interface IBillingType
     {
-        public String Number { get; set; }
+        String Name { set; get; }
+        int Tariff { set; get; }
 
     }
 }

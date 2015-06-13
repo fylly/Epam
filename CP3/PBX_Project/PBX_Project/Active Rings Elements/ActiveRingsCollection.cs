@@ -77,6 +77,11 @@ namespace PBX_Project
                 return new PhoneNumberStruct();
             }
         }
+
+        public ActiveRing GetActiveRingByNumber(PhoneNumberStruct number)
+        {
+            return _activeRings.FirstOrDefault(x => x.IsContainsPhoneNumber(number));
+        }
         #endregion
     }
 }
