@@ -8,6 +8,6 @@ namespace PBX_Project
     public class CallingEventArgs : EventArgs
     {
         public TerminalState TerminalStateArg { get; set; }
-        public PhoneNumber PhoneNumberArg { get; set; }
+        public PhoneNumberStruct PhoneNumberArg { get; set; }
     }
 }

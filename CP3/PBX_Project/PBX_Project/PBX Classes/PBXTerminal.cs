@@ -24,7 +24,9 @@ namespace PBX_Project
             _state = TerminalState.Available;
         }
 
-        public bool CallTo(PhoneNumber number)
+        // Users Methods
+        #region UsersMethods
+        public bool CallTo(PhoneNumberStruct number)
         {
             if (State == TerminalState.Available)
             {
@@ -32,7 +34,7 @@ namespace PBX_Project
                 callingEventArgs.PhoneNumberArg = number;
                 callingEventArgs.TerminalStateArg = TerminalState.Available;
 
-                Calling(this, callingEventArgs);
+                CallingTo(this, callingEventArgs);
 
                 _state = callingEventArgs.TerminalStateArg;
 
@@ -65,12 +67,16 @@ namespace PBX_Project
                 _state = TerminalState.Disabled;
             }
         }
+        #endregion
 
+        // Technical Methods
+        #region UsersMethods
         public bool Ring()
         {
             if (State == TerminalState.Available)
             {
                 _state = TerminalState.Ring;
+                //Ringing(this, new CallingEventArgs());
                 return true;
             }
             else
@@ -86,8 +92,11 @@ namespace PBX_Project
                 _state = TerminalState.Available;
             }
         }
-        
-        public event EventHandler<CallingEventArgs> Calling;
+        #endregion
+
+        public event EventHandler<CallingEventArgs> CallingTo;
         public event EventHandler<CallingEventArgs> EndedCall;
+        public event EventHandler<CallingEventArgs> Ringing;
+
     }
 }

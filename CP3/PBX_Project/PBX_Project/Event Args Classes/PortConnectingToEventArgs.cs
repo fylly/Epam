@@ -9,6 +9,6 @@ namespace PBX_Project
     {
         public TerminalState TerminalStateArg { get; set; }
         public PortState PortStateArg { get; set; }
-        public PhoneNumber PhoneNumberArg { get; set; }
+        public PhoneNumberStruct PhoneNumberArg { get; set; }
     }
 }

@@ -8,11 +8,10 @@ namespace PBX_Project
 {
     public class PBXPort
     {
-        private PBXUser _pbxUser;
         private PBXTerminal _pbxTerminal;
         private PortState _state;
 
-        public PhoneNumber phoneNumber { get; set; }
+        public PhoneNumberStruct PhoneNumber { get; set; }
 
         public PortState State {
             get
@@ -20,18 +19,7 @@ namespace PBX_Project
                 return _state;
             }
         }
-
-        public PBXUser PbxUser {
-            get { return _pbxUser; }
-            set
-            {
-                if (value != null)
-                {
-                    _pbxUser = value;
-                }
-            }
-        }
-
+        
         public PBXTerminal PbxTerminal { 
             get { return _pbxTerminal; }
             set
@@ -39,15 +27,16 @@ namespace PBX_Project
                 if (value != null)
                 {
                     _pbxTerminal = value;
-                    _pbxTerminal.Calling += c_Calling;
-                    _pbxTerminal.EndedCall += c_EndedCall;
+                    _pbxTerminal.CallingTo += CallingHandler;
+                    _pbxTerminal.EndedCall += EndedCallHandler;
                 }
             }
         }
         
          // Constructor
-        public PBXPort()
+        public PBXPort(PhoneNumberStruct number)
         {
+            PhoneNumber = number;
             _state = PortState.Available;
         }
 
@@ -59,6 +48,7 @@ namespace PBX_Project
                 if (_pbxTerminal.Ring())
                 {
                     _state = PortState.Busy;
+                    //Ringing(this, new PortConnectingToEventArgs());
                     return true;
                 }
                 else
@@ -82,7 +72,8 @@ namespace PBX_Project
         }
 
         // Delegates
-        void c_Calling(object sender, CallingEventArgs e)
+        #region EventHandlerMethods
+        private void CallingHandler(object sender, CallingEventArgs e)
         {
             if (sender != null && e != null && State == PortState.Available)
             {
@@ -99,7 +90,7 @@ namespace PBX_Project
             
         }
 
-        void c_EndedCall(object sender, CallingEventArgs e)
+        private void EndedCallHandler(object sender, CallingEventArgs e)
         {
             if (State != PortState.Disabled)
             {
@@ -107,9 +98,11 @@ namespace PBX_Project
                 _state = PortState.Available;
             }
         }
+        #endregion
 
         // Events
         public event EventHandler<PortConnectingToEventArgs> ConnectingTo;
         public event EventHandler<PortConnectingToEventArgs> EndedCall;
+        public event EventHandler<PortConnectingToEventArgs> Ringing;
     }
 }

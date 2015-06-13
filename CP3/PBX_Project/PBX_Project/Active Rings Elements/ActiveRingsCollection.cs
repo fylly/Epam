@@ -9,6 +9,8 @@ namespace PBX_Project
     {
         private ICollection<ActiveRing> _activeRings = new List<ActiveRing>();
 
+        // InterfaceMethods
+        #region InterfaceMethods
         public void Add(ActiveRing item)
         {
             _activeRings.Add(item);
@@ -53,25 +55,28 @@ namespace PBX_Project
         {
             return this.GetEnumerator();
         }
+        #endregion
 
         // Methods
-        public void DeleteByPhoneNumber(PhoneNumber item)
+        #region UsersMethods
+        public void DeleteByPhoneNumber(PhoneNumberStruct item)
         {
-            _activeRings.Where(x => !x.IsContainsPhoneNumber(item));
+            _activeRings = _activeRings.Where(x => !x.IsContainsPhoneNumber(item)).ToList();
         }
 
-        public PhoneNumber GetSecondNumber (PhoneNumber item)
+        public PhoneNumberStruct GetSecondNumberByNumber(PhoneNumberStruct item)
         {
-            var ringsBuff = _activeRings.Where(x => x.IsContainsPhoneNumber(item)).ToList();
+            var ringsBuff = _activeRings.FirstOrDefault(x => x.IsContainsPhoneNumber(item));
 
-            if (ringsBuff.Count > 0)
+            if (ringsBuff != null)
             {
-                return ringsBuff.Select(x => x.GetSecondValueIfExist(item)).First();
+                return ringsBuff.GetSecondValueIfExist(item);
             }
             else
             {
-                return new PhoneNumber();
+                return new PhoneNumberStruct();
             }
         }
+        #endregion
     }
 }

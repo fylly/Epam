@@ -5,8 +5,8 @@ using System.Text;
 
 namespace PBX_Project
 {
-    public struct PhoneNumber
+    public class BillingSystem
     {
-        public String Number { get; set; }
+        
     }
 }

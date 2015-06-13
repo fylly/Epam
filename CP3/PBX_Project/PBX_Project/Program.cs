@@ -10,36 +10,59 @@ namespace PBX_Project
         static void Main(string[] args)
         {
             PBX pbx = new PBX();
-            pbx.Add(new PBXPort(){ PbxTerminal = new PBXTerminal(),phoneNumber = new PhoneNumber(){Number = "110"}});
-            pbx.Add(new PBXPort() { PbxTerminal = new PBXTerminal(), phoneNumber = new PhoneNumber() { Number = "111" } });
+            pbx.AddPort(new PBXPort(new PhoneNumberStruct("110")){ PbxTerminal = new PBXTerminal() });
+            pbx.AddPort(new PBXPort(new PhoneNumberStruct("111")) { PbxTerminal = new PBXTerminal() });
 
-            pbx.Call(new PhoneNumber(){Number = "111"}, new PhoneNumber(){Number = "110"});
+            pbx.Call(new PhoneNumberStruct("111"), new PhoneNumberStruct("110"));
 
             Console.WriteLine("Ports State");
-            foreach (var i in pbx)
+            foreach (var i in pbx.GetPorts())
             {
-                Console.WriteLine("{0} - {1} - {2}",i.phoneNumber.Number, i.State, i.PbxTerminal.State);
+                Console.WriteLine("{0} - {1} - {2}",i.PhoneNumber.Number, i.State, i.PbxTerminal.State);
+            }
+            Console.WriteLine("Active Rings");
+            foreach (var i in pbx.GetActiveRings())
+            {
+                Console.WriteLine("{0} - {1} - {2}", i.PhoneSource.Number, i.PhoneDestination.Number, i.State);
             }
 
-            pbx.EndCall(new PhoneNumber() { Number = "110" });
+
+            pbx.EndCall(new PhoneNumberStruct("110"));
             Console.WriteLine("Ports State");
-            foreach (var i in pbx)
+            foreach (var i in pbx.GetPorts())
             {
-                Console.WriteLine("{0} - {1} - {2}", i.phoneNumber.Number, i.State, i.PbxTerminal.State);
+                Console.WriteLine("{0} - {1} - {2}", i.PhoneNumber.Number, i.State, i.PbxTerminal.State);
+            }
+            Console.WriteLine("Active Rings");
+            foreach (var i in pbx.GetActiveRings())
+            {
+                Console.WriteLine("{0} - {1} - {2}", i.PhoneSource.Number, i.PhoneDestination.Number, i.State);
             }
 
-            pbx.UnPlugTerminal(new PhoneNumber() { Number = "110" });
+
+            pbx.UnPlugTerminal(new PhoneNumberStruct("110"));
             Console.WriteLine("Ports State");
-            foreach (var i in pbx)
+            foreach (var i in pbx.GetPorts())
             {
-                Console.WriteLine("{0} - {1} - {2}", i.phoneNumber.Number, i.State, i.PbxTerminal.State);
+                Console.WriteLine("{0} - {1} - {2}", i.PhoneNumber.Number, i.State, i.PbxTerminal.State);
+            }
+            Console.WriteLine("Active Rings");
+            foreach (var i in pbx.GetActiveRings())
+            {
+                Console.WriteLine("{0} - {1} - {2}", i.PhoneSource.Number, i.PhoneDestination.Number, i.State);
             }
 
-            pbx.Call(new PhoneNumber() { Number = "111" }, new PhoneNumber() { Number = "110" });
+
+            pbx.Call(new PhoneNumberStruct("111"), new PhoneNumberStruct("110"));
             Console.WriteLine("Ports State");
-            foreach (var i in pbx)
+            foreach (var i in pbx.GetPorts())
             {
-                Console.WriteLine("{0} - {1} - {2}", i.phoneNumber.Number, i.State, i.PbxTerminal.State);
+                Console.WriteLine("{0} - {1} - {2}", i.PhoneNumber.Number, i.State, i.PbxTerminal.State);
+            }
+            Console.WriteLine("Active Rings");
+            foreach (var i in pbx.GetActiveRings())
+            {
+                Console.WriteLine("{0} - {1} - {2}", i.PhoneSource.Number, i.PhoneDestination.Number, i.State);
             }
 
             Console.ReadKey();

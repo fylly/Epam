@@ -41,23 +41,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActiveRing.cs" />
-    <Compile Include="ActiveRingsCollection.cs" />
-    <Compile Include="CallingEventArgs.cs" />
-    <Compile Include="PBX.cs" />
-    <Compile Include="PBXTerminal.cs" />
+    <Compile Include="Active Rings Elements\ActiveRing.cs" />
+    <Compile Include="Active Rings Elements\ActiveRingsCollection.cs" />
+    <Compile Include="Active Rings Elements\ActiveRingState.cs" />
+    <Compile Include="BillingSystem.cs" />
+    <Compile Include="Event Args Classes\CallingEventArgs.cs" />
+    <Compile Include="PBX Classes\PBX.cs" />
+    <Compile Include="PBX Classes\PBXTerminal.cs" />
     <Compile Include="PBXUser.cs" />
-    <Compile Include="PBXPort.cs" />
-    <Compile Include="PhoneNumber.cs" />
-    <Compile Include="PortConnectingToEventArgs.cs" />
-    <Compile Include="PortState.cs" />
+    <Compile Include="PBX Classes\PBXPort.cs" />
+    <Compile Include="PBX Classes\PhoneNumber.cs" />
+    <Compile Include="Event Args Classes\PortConnectingToEventArgs.cs" />
+    <Compile Include="PBX Classes\PortState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TerminalState.cs" />
+    <Compile Include="PBX Classes\TerminalState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

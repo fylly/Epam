@@ -7,26 +7,26 @@ namespace PBX_Project
 {
     public class ActiveRing
     {
-        private PhoneNumber _phoneSource;
-        private PhoneNumber _phoneDestination;
-        private TerminalState _state;
+        private PhoneNumberStruct _phoneSource;
+        private PhoneNumberStruct _phoneDestination;
+        private ActiveRingState _state;
 
-        public ActiveRing (PhoneNumber source, PhoneNumber destination)
+        public ActiveRing(PhoneNumberStruct source, PhoneNumberStruct destination)
         {
             _phoneSource = source;
             _phoneDestination = destination;
-            _state = TerminalState.Ring;
+            _state = ActiveRingState.Ring;
         }
 
-        public PhoneNumber PhoneSource 
+        public PhoneNumberStruct PhoneSource 
         { 
             get
             {  
                 return _phoneSource; 
             } 
-        } 
+        }
 
-        public PhoneNumber PhoneDestination
+        public PhoneNumberStruct PhoneDestination
         {
             get
             {
@@ -34,7 +34,7 @@ namespace PBX_Project
             }
         } 
 
-        public TerminalState State
+        public ActiveRingState State
         {
             get
             {
@@ -43,9 +43,9 @@ namespace PBX_Project
         }
 
         // Methods
-        public bool IsContainsPhoneNumber(PhoneNumber item)
+        public bool IsContainsPhoneNumber(PhoneNumberStruct item)
         {
-            if(PhoneSource.Number == item.Number || PhoneDestination.Number == item.Number )
+            if(PhoneSource == item || PhoneDestination == item )
             {
                 return true;
             }
@@ -56,19 +56,19 @@ namespace PBX_Project
 
         }
 
-        public PhoneNumber GetSecondValueIfExist(PhoneNumber item)
+        public PhoneNumberStruct GetSecondValueIfExist(PhoneNumberStruct item)
         {
-            if (PhoneSource.Number == item.Number)
+            if (PhoneSource == item)
             {
                 return PhoneDestination;
             }
-            else if(PhoneDestination.Number == item.Number)
+            else if(PhoneDestination == item)
             {
                 return PhoneSource;
             }
             else
             {
-                return new PhoneNumber();
+                return new PhoneNumberStruct();
             }
         }    
     }
