@@ -3,7 +3,7 @@
   <Class Name="PBX_Project.PBX">
     <Position X="0.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QQQAYAkAAAwABACCAAAQAAEAAAAAAABAAEAAAgAAAAA=</HashCode>
+      <HashCode>QQQAYAkAAAwABACCAAAQAAEAAAAgAABAAEAAAgAAAAA=</HashCode>
       <FileName>PBX Classes\PBX.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -18,7 +18,7 @@
     <Position X="24.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABAAAAAAABAAAAAAAAQAQAAAAgAAAAAQIIAAAAAAA=</HashCode>
-      <FileName>Client.cs</FileName>
+      <FileName>Billing System Elements\Client.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PBX_Project.PBXTerminal">
@@ -61,28 +61,28 @@
     <Position X="22.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAQAAAAAAAAQAAAAAAQgAIAAAAACAAAAgAA=</HashCode>
-      <FileName>BillingSystem.cs</FileName>
+      <FileName>Billing System Elements\BillingSystem.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PBX_Project.CallStatistics">
     <Position X="24.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAQAAAAAAAAQAAAAgAAAAAAAAAAAAAAAgAA=</HashCode>
-      <FileName>CallStatistics.cs</FileName>
+      <FileName>Billing System Elements\CallStatistics.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PBX_Project.CallStatisticsItem">
     <Position X="26.75" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAgAAAAAACBABAAAAAQAgAAAAAAAAIACAAKAAAAAQA=</HashCode>
-      <FileName>CallStatisticsItem.cs</FileName>
+      <FileName>Billing System Elements\CallStatisticsItem.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PBX_Project.TariffStandart">
     <Position X="31" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAYEAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>TariffStandart.cs</FileName>
+      <FileName>Billing System Elements\TariffStandart.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -90,14 +90,14 @@
     <Position X="9.5" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
-      <FileName>TerminalDefaultEventArg.cs</FileName>
+      <FileName>Event Args Classes\TerminalDefaultEventArg.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PBX_Project.PortDefaultEventArgs">
     <Position X="9.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
-      <FileName>PortDefaultEventArgs.cs</FileName>
+      <FileName>Event Args Classes\PortDefaultEventArgs.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="PBX_Project.PhoneNumberStruct">
@@ -111,7 +111,7 @@
     <Position X="31" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>IBillingType.cs</FileName>
+      <FileName>Billing System Elements\IBillingType.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="PBX_Project.TerminalState">
