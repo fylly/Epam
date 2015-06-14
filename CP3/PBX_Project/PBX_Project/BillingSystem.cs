@@ -24,11 +24,24 @@ namespace PBX_Project
             _clients.Add(item);
         }
 
+        public void SetNewBillingType(PhoneNumberStruct number,IBillingType billingType, DateTime billingChangeDate)
+        {
+            var clientBuff = _clients.FirstOrDefault(x=>x.PhoneNumber == number);
+            if (clientBuff != null)
+            {
+                clientBuff.SetNewBillingType(billingType,billingChangeDate);
+            }
+        }
+
         public IEnumerable<CallStatisticsItem> GetStatistics ()
         {
             return _callStatistics.GetStatistics();
         }
-        
+
+        public IEnumerable<CallStatisticsItem> GetStatisticsByNumber(PhoneNumberStruct number)
+        {
+            return _callStatistics.GetStatisticsByNumber(number);
+        }
         
     }
 }

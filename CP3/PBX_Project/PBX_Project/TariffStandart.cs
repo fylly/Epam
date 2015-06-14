@@ -8,24 +8,22 @@ namespace PBX_Project
     public class TariffStandart : IBillingType
     {
         private String _name;
-        private int _tariff;
+        private double _tariff;
 
         public TariffStandart(String name,int tariff) 
         {
-            Name = name;
-            Tariff = tariff;
+            _name = name;
+            _tariff = tariff;
         }
 
         public string Name
         {
             get { return _name; }
-            set { _name = value; }
         }
 
-        public int Tariff
+        public double Tariff
         {
             get { return _tariff; }
-            set { _tariff = value; }
         }
     }
 }

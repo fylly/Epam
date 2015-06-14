@@ -5,10 +5,8 @@ using System.Text;
 
 namespace PBX_Project
 {
-    public interface IBillingType
+    public class TerminalDefaultEventArg : EventArgs
     {
-        String Name { get; }
-        double Tariff { get; }
-
+        public TerminalState TerminalStateArg { get; set; }
     }
 }

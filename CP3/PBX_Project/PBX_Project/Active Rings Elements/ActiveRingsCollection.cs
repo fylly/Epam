@@ -78,9 +78,9 @@ namespace PBX_Project
             }
         }
 
-        public ActiveRing GetActiveRingByNumber(PhoneNumberStruct number)
+        public ActiveRing GetActiveTalkByNumber(PhoneNumberStruct number)
         {
-            return _activeRings.FirstOrDefault(x => x.IsContainsPhoneNumber(number));
+            return _activeRings.FirstOrDefault(x => x.IsContainsPhoneNumber(number) && x.State == ActiveRingState.Talk);
         }
         #endregion
     }

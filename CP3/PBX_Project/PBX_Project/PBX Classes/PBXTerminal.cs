@@ -12,10 +12,7 @@ namespace PBX_Project
 
         public TerminalState State
         {
-            get
-            {
-                return _state;
-            }
+            get { return _state; }
         }
 
         // Constructor
@@ -34,7 +31,7 @@ namespace PBX_Project
                 callingEventArgs.PhoneNumberArg = number;
                 callingEventArgs.TerminalStateArg = TerminalState.Available;
 
-                CallingTo(this, callingEventArgs);
+                OnCallingTo(callingEventArgs);
 
                 _state = callingEventArgs.TerminalStateArg;
 
@@ -46,9 +43,25 @@ namespace PBX_Project
         {
             if (State != TerminalState.Disabled)
             {
-                EndedCall(this, new CallingEventArgs());
+                TerminalDefaultEventArg terminalDefaultEventArg = new TerminalDefaultEventArg();
+                terminalDefaultEventArg.TerminalStateArg = _state;
+
+                OnEndedCall(terminalDefaultEventArg);
 
                 _state = TerminalState.Available;
+            }
+        }
+
+        public void Answer()
+        {
+            if (State == TerminalState.Ring)
+            {
+                TerminalDefaultEventArg terminalDefaultEventArg = new TerminalDefaultEventArg();
+                terminalDefaultEventArg.TerminalStateArg = _state;
+
+                OnAnswered(terminalDefaultEventArg);
+
+                _state = terminalDefaultEventArg.TerminalStateArg;
             }
         }
 
@@ -69,6 +82,7 @@ namespace PBX_Project
         }
         #endregion
 
+
         // Technical Methods
         #region UsersMethods
         public bool Ring()
@@ -76,7 +90,9 @@ namespace PBX_Project
             if (State == TerminalState.Available)
             {
                 _state = TerminalState.Ring;
-                //Ringing(this, new CallingEventArgs());
+
+                OnRinging(new TerminalDefaultEventArg());
+
                 return true;
             }
             else
@@ -94,9 +110,50 @@ namespace PBX_Project
         }
         #endregion
 
+
+        #region OnHandlerMethods
+        protected virtual void OnCallingTo(CallingEventArgs e)
+        {
+            EventHandler<CallingEventArgs> handler = CallingTo;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        protected virtual void OnEndedCall(TerminalDefaultEventArg e)
+        {
+            EventHandler<TerminalDefaultEventArg> handler = EndedCall;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        protected virtual void OnRinging(TerminalDefaultEventArg e)
+        {
+            EventHandler<TerminalDefaultEventArg> handler = Ringing;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        protected virtual void OnAnswered(TerminalDefaultEventArg e)
+        {
+            
+            EventHandler<TerminalDefaultEventArg> handler = Answered;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+        #endregion
+
         public event EventHandler<CallingEventArgs> CallingTo;
-        public event EventHandler<CallingEventArgs> EndedCall;
-        public event EventHandler<CallingEventArgs> Ringing;
+        public event EventHandler<TerminalDefaultEventArg> EndedCall;
+        public event EventHandler<TerminalDefaultEventArg> Ringing;
+        public event EventHandler<TerminalDefaultEventArg> Answered;
 
     }
 }

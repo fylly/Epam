@@ -46,5 +46,21 @@ namespace PBX_Project
         {
             get { return _finishTimeCall; }
         }
+
+        public TimeSpan TimeCall
+        {
+            get { return (FinishTimeCall - StartTimeCall); }
+        }
+
+        public double Summ
+        {
+            get
+            {
+                if (BillingType != null)
+                { return Math.Truncate(TimeCall.TotalSeconds) * BillingType.Tariff; }
+                else
+                { return 0; }
+            }
+        }
     }
 }

@@ -18,5 +18,10 @@ namespace PBX_Project
         {
             return _callStatistics;
         }
+
+        public IEnumerable<CallStatisticsItem> GetStatisticsByNumber(PhoneNumberStruct number)
+        {
+            return _callStatistics.Where(x=> x.PhoneSource == number);
+        }
     }
 }

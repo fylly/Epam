@@ -73,6 +73,14 @@ namespace PBX_Project
                     return new PhoneNumberStruct();
                 }
             }
-        }    
+        }
+
+        public void SetStateAnswer(DateTime item)
+        {
+            _state = ActiveRingState.Talk;
+            _ringTime = item;
+        }
+    
+
     }
 }

@@ -29,6 +29,7 @@ namespace PBX_Project
                     _pbxTerminal = value;
                     _pbxTerminal.CallingTo += CallingHandler;
                     _pbxTerminal.EndedCall += EndedCallHandler;
+                    _pbxTerminal.Answered += AnsweredHandler;
                 }
             }
         }
@@ -48,7 +49,7 @@ namespace PBX_Project
                 if (_pbxTerminal.Ring())
                 {
                     _state = PortState.Busy;
-                    //Ringing(this, new PortConnectingToEventArgs());
+                    OnRinging(new PortDefaultEventArgs());
                     return true;
                 }
                 else
@@ -75,34 +76,103 @@ namespace PBX_Project
         #region EventHandlerMethods
         private void CallingHandler(object sender, CallingEventArgs e)
         {
-            if (sender != null && e != null && State == PortState.Available)
+            if (sender is PBXTerminal && e != null)
             {
-                PortConnectingToEventArgs portConnectingToEventArgs = new PortConnectingToEventArgs();
-                portConnectingToEventArgs.PhoneNumberArg = e.PhoneNumberArg;
-                portConnectingToEventArgs.TerminalStateArg = e.TerminalStateArg; 
-                portConnectingToEventArgs.PortStateArg = State;
+                if (State == PortState.Available)
+                {
+                    PortConnectingToEventArgs portConnectingToEventArgs = new PortConnectingToEventArgs();
+                    portConnectingToEventArgs.PhoneNumberArg = e.PhoneNumberArg;
+                    portConnectingToEventArgs.TerminalStateArg = e.TerminalStateArg;
+                    portConnectingToEventArgs.PortStateArg = State;
 
-                ConnectingTo(this, portConnectingToEventArgs);
+                    OnConnectingTo(portConnectingToEventArgs);
 
-                _state = portConnectingToEventArgs.PortStateArg;
-                e.TerminalStateArg = portConnectingToEventArgs.TerminalStateArg;
+                    _state = portConnectingToEventArgs.PortStateArg;
+                    e.TerminalStateArg = portConnectingToEventArgs.TerminalStateArg;
+                }
             }
             
         }
 
-        private void EndedCallHandler(object sender, CallingEventArgs e)
+        private void EndedCallHandler(object sender, TerminalDefaultEventArg e)
         {
-            if (State != PortState.Disabled)
+            if (sender is PBXTerminal && e != null)
             {
-                EndedCall(this,new PortConnectingToEventArgs());
-                _state = PortState.Available;
+                if (State != PortState.Disabled)
+                {
+                    PortDefaultEventArgs portDefaultEventArgs = new PortDefaultEventArgs();
+                    portDefaultEventArgs.TerminalStateArg = e.TerminalStateArg;
+                    portDefaultEventArgs.PortStateArg = State;
+
+                    OnEndedCall(portDefaultEventArgs);
+
+                    _state = PortState.Available;
+                }
+            }
+        }
+
+        private void AnsweredHandler(object sender, TerminalDefaultEventArg e)
+        {
+            if (sender is PBXTerminal && e != null)
+            {
+                if (State == PortState.Busy)
+                {
+                    PortDefaultEventArgs portDefaultEventArgs = new PortDefaultEventArgs();
+                    portDefaultEventArgs.TerminalStateArg = e.TerminalStateArg;
+                    portDefaultEventArgs.PortStateArg = State;
+
+                    OnAnswered(portDefaultEventArgs);
+
+                    _state = portDefaultEventArgs.PortStateArg;
+                    e.TerminalStateArg = portDefaultEventArgs.TerminalStateArg;
+                }
+            }
+        }
+        #endregion
+
+
+        #region OnHandlerMethods
+        protected virtual void OnConnectingTo(PortConnectingToEventArgs e)
+        {
+            EventHandler<PortConnectingToEventArgs> handler = ConnectingTo;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        protected virtual void OnEndedCall(PortDefaultEventArgs e)
+        {
+            EventHandler<PortDefaultEventArgs> handler = EndedCall;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        protected virtual void OnRinging(PortDefaultEventArgs e)
+        {
+            EventHandler<PortDefaultEventArgs> handler = Ringing;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        protected virtual void OnAnswered(PortDefaultEventArgs e)
+        {
+            EventHandler<PortDefaultEventArgs> handler = Answered;
+            if (handler != null)
+            {
+                handler(this, e);
             }
         }
         #endregion
 
         // Events
         public event EventHandler<PortConnectingToEventArgs> ConnectingTo;
-        public event EventHandler<PortConnectingToEventArgs> EndedCall;
-        public event EventHandler<PortConnectingToEventArgs> Ringing;
+        public event EventHandler<PortDefaultEventArgs> EndedCall;
+        public event EventHandler<PortDefaultEventArgs> Ringing;
+        public event EventHandler<PortDefaultEventArgs> Answered;
     }
 }

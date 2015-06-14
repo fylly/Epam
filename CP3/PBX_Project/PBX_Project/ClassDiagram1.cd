@@ -3,33 +3,33 @@
   <Class Name="PBX_Project.PBX">
     <Position X="0.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAQAYAkAAAwABACCAAAAAAEAAAAAAABAAEAAAAAAAAA=</HashCode>
+      <HashCode>QQQAYAkAAAwABACCAAAQAAEAAAAAAABAAEAAAgAAAAA=</HashCode>
       <FileName>PBX Classes\PBX.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PBX_Project.PBXPort">
     <Position X="2.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAQAAAAAAEAAAABSAMAIAAAAAgAAAAADAAAAAA=</HashCode>
+      <HashCode>AQQAAAAQAAAAAAGAAQABSAMAIAAAABgAAAIADAABAAA=</HashCode>
       <FileName>PBX Classes\PBXPort.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PBX_Project.Client">
     <Position X="24.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAABAAAAAAAAQAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <HashCode>AAABAAAAAAABAAAAAAAAQAQAAAAgAAAAAQIIAAAAAAA=</HashCode>
       <FileName>Client.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PBX_Project.PBXTerminal">
     <Position X="4.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQABAAQAAAAAACAAAABCAAAAAAAAAwAAgQABAAAAAA=</HashCode>
+      <HashCode>AAQABAAQAAAAAACAAAABCAAAAAAAABwAAgYABgABAAA=</HashCode>
       <FileName>PBX Classes\PBXTerminal.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PBX_Project.CallingEventArgs">
-    <Position X="9.5" Y="2.75" Width="1.5" />
+    <Position X="9.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAQAAAAAAAAAAA=</HashCode>
       <FileName>Event Args Classes\CallingEventArgs.cs</FileName>
@@ -45,46 +45,60 @@
   <Class Name="PBX_Project.ActiveRing">
     <Position X="18.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAACAAAAAAIAQCgAAAAAAAAQAAAAGBAAACAA=</HashCode>
+      <HashCode>AAAAAAAAAACAAAAAAIAQCgAAAAAAAAQAAABGBAAACAA=</HashCode>
       <FileName>Active Rings Elements\ActiveRing.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PBX_Project.ActiveRingsCollection">
     <Position X="16.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gCIAIAAAAABAABAQAAAABASAAAAAAAAAAAAAAABQIAA=</HashCode>
+      <HashCode>ACIAIAAAAABAABAQAAAABASAgAAAAAAAAAAAAABQIAA=</HashCode>
       <FileName>Active Rings Elements\ActiveRingsCollection.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="PBX_Project.BillingSystem">
-    <Position X="22.75" Y="0.5" Width="1.5" />
+    <Position X="22.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAQAAIAAAAACAAAAgAA=</HashCode>
+      <HashCode>AAAAAAAAAAQAAAAAAAAQAAAAAAQgAIAAAAACAAAAgAA=</HashCode>
       <FileName>BillingSystem.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PBX_Project.CallStatistics">
-    <Position X="24.75" Y="3" Width="1.5" />
+    <Position X="24.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAgAAAAAAAAAAAAAAAgAA=</HashCode>
+      <HashCode>AAAAAAAAAAQAAAAAAAAQAAAAgAAAAAAAAAAAAAAAgAA=</HashCode>
       <FileName>CallStatistics.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PBX_Project.CallStatisticsItem">
-    <Position X="26.75" Y="1.5" Width="1.5" />
+    <Position X="26.75" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAACBABAAAAAQAgAAAAAAAAIACAAKAAAAAQA=</HashCode>
+      <HashCode>AAAgAAAAAACBABAAAAAQAgAAAAAAAAIACAAKAAAAAQA=</HashCode>
       <FileName>CallStatisticsItem.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PBX_Project.TariffStandart">
-    <Position X="30.5" Y="2.5" Width="1.5" />
+    <Position X="31" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAYEAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>TariffStandart.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PBX_Project.TerminalDefaultEventArg">
+    <Position X="9.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>TerminalDefaultEventArg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PBX_Project.PortDefaultEventArgs">
+    <Position X="9.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>PortDefaultEventArgs.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Struct Name="PBX_Project.PhoneNumberStruct">
     <Position X="7.5" Y="0.75" Width="1.5" />

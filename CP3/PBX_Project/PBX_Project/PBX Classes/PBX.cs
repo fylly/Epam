@@ -16,10 +16,13 @@ namespace PBX_Project
             _pbxPorts.Add(item);
             _pbxPorts.Last().ConnectingTo += ConnectingToHandler;
             _pbxPorts.Last().EndedCall += EndedCallHandler;
+            _pbxPorts.Last().Answered += AnsweredHandler;
 
-            _billingSystem.AddClient(new Client(item.PhoneNumber, name, billing));
+            _billingSystem.AddClient(new Client(item.PhoneNumber, name, billing, System.DateTime.Now));
         }
-        
+
+        // Methods For Statistics: Billing, ActiveRings, Ports
+        #region MethodsForStatistics
         public IEnumerable <PBXPort> GetPorts()
         {
             return _pbxPorts;
@@ -30,6 +33,19 @@ namespace PBX_Project
             return _activeRings;
         }
 
+        public IEnumerable<CallStatisticsItem> GetStatistics()
+        {
+            return _billingSystem.GetStatistics();
+        }
+
+        public IEnumerable<CallStatisticsItem> GetStatisticsByNumber(PhoneNumberStruct number)
+        {
+            return _billingSystem.GetStatisticsByNumber(number);
+        }
+        #endregion
+
+        // Methods For Terminals : Call, Disconect ...
+        #region MethodsForTerminals
         public void Call(PhoneNumberStruct phoneSource, PhoneNumberStruct phoneDestination)
         {
             var source = _pbxPorts.FirstOrDefault(x => x.PhoneNumber == phoneSource);
@@ -45,6 +61,15 @@ namespace PBX_Project
             if (source != null)
             {
                 source.PbxTerminal.EndCall();
+            }
+        }
+
+        public void Answer(PhoneNumberStruct number)
+        {
+            var source = _pbxPorts.FirstOrDefault(x => x.PhoneNumber == number);
+            if (source != null)
+            {
+                source.PbxTerminal.Answer();
             }
         }
 
@@ -65,6 +90,14 @@ namespace PBX_Project
                 source.PbxTerminal.Plug();
             }
         }
+        #endregion
+
+        #region MethodsForBilling
+        public void SetNewBillingType(PhoneNumberStruct number, IBillingType billingType)
+        {
+            _billingSystem.SetNewBillingType(number,billingType,new DateTime(2016,11,1));
+        }
+        #endregion
 
         // Technical Methods
         #region TechnicalMethods
@@ -96,45 +129,62 @@ namespace PBX_Project
         #region EventHandlerMethods
         void ConnectingToHandler(object sender, PortConnectingToEventArgs e)
         {
-            if (sender != null && e != null && sender is PBXPort)
+            if (sender is PBXPort && e != null )
             {
-                if (Connecting(e.PhoneNumberArg))
+                var firstNumber = ((PBXPort) sender).PhoneNumber;
+                if (firstNumber != e.PhoneNumberArg)
                 {
-                    var firstNumber = ((PBXPort) sender).PhoneNumber;
+                    if (Connecting(e.PhoneNumberArg))
+                    {
+                        e.PortStateArg = PortState.Busy;
+                        e.TerminalStateArg = TerminalState.Busy;
 
-                    e.PortStateArg = PortState.Busy;
-                    e.TerminalStateArg = TerminalState.Busy;
-
-                    _activeRings.Add(new ActiveRing(
-                        firstNumber,
-                        e.PhoneNumberArg,
-                        System.DateTime.Now));
-                };
+                        _activeRings.Add(new ActiveRing(
+                            firstNumber,
+                            e.PhoneNumberArg,
+                            System.DateTime.Now));
+                    }
+                }
             }
         }
 
-        void EndedCallHandler(object sender, PortConnectingToEventArgs e)
+        void EndedCallHandler(object sender, PortDefaultEventArgs e)
         {
-            if (sender != null && e != null && sender is PBXPort)
+            if (sender is PBXPort && e != null)
             {
                 var firstNumber = ((PBXPort) sender).PhoneNumber;
                 var secondNumber = _activeRings.GetSecondNumberByNumber(firstNumber);
                 Disconnect(secondNumber);
                 
-                var activeRing = _activeRings.GetActiveRingByNumber(firstNumber);
+                var activeRing = _activeRings.GetActiveTalkByNumber(firstNumber);
                 if (activeRing != null)
                 {
                     _billingSystem.AddCallStatistics(activeRing.PhoneSource, activeRing.PhoneDestination,activeRing.RingTime, System.DateTime.Now);
                 }
                 
                 _activeRings.DeleteByPhoneNumber(firstNumber);
+                
+            }
+        }
 
-                Console.WriteLine("---------------------");
-                foreach (var i in _billingSystem.GetStatistics())
+        void AnsweredHandler(object sender, PortDefaultEventArgs e)
+        {
+            if (sender is PBXPort && e != null)
+            {
+                if (e.PortStateArg == PortState.Busy && e.TerminalStateArg == TerminalState.Ring)
                 {
-                    Console.WriteLine("{0} - {1} - {2} - {3} - {4}",i.PhoneSource.Number,i.PhoneDestination.Number,i.StartTimeCall, i.FinishTimeCall, i.BillingType.Tariff);
+                    var activeRingBuff = _activeRings.FirstOrDefault(x => x.PhoneDestination == ((PBXPort) sender).PhoneNumber);
+                    if (activeRingBuff != null)
+                    {
+                        activeRingBuff.SetStateAnswer(System.DateTime.Now);
+                        e.TerminalStateArg = TerminalState.Busy;
+                    }
+                    else
+                    {
+                        e.PortStateArg = PortState.Available;
+                        e.TerminalStateArg = TerminalState.Available;
+                    }
                 }
-                Console.WriteLine("---------------------");
             }
         }
         #endregion
