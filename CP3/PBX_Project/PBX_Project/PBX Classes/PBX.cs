@@ -95,7 +95,7 @@ namespace PBX_Project
         #region MethodsForBilling
         public void SetNewBillingType(PhoneNumberStruct number, IBillingType billingType)
         {
-            _billingSystem.SetNewBillingType(number,billingType,new DateTime(2016,11,1));
+            _billingSystem.SetNewBillingType(number,billingType,System.DateTime.Now);
         }
         #endregion
 
