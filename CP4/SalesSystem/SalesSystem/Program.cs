@@ -12,12 +12,14 @@ namespace SalesSystem
     {
         static void Main(string[] args)
         {
-            var context = new SalesContainer();
+            SalesDataLevel.IRepository<SalesModel.Product> context = new SalesDataLevel.ProductRepository();
 
+            //context.Add(new SalesModel.Product() { ProductName = "Coca-Cola", Barcode = "0178995445" });
+            //context.SaveChanges();
 
-            foreach (var i in context.Products.ToList())
+            foreach (var i in context.GetAll())
             {
-                Console.WriteLine("{0} - {1}", i.ProductName, i.Barcode);
+                Console.WriteLine("{0} - {1} \t- {2}", i.Id, i.ProductName, i.Barcode);
             }
 
             Console.ReadKey();

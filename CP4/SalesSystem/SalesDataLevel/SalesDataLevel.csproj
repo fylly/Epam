@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BCCD0825-3F4B-4588-BF2A-D0DC7AB38D8F}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{31662C71-2607-4755-9EF5-7C0C897BEC95}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SalesSystem</RootNamespace>
-    <AssemblyName>SalesSystem</AssemblyName>
+    <RootNamespace>SalesDataLevel</RootNamespace>
+    <AssemblyName>SalesDataLevel</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -50,11 +48,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Repositories\InputFilesRepository.cs" />
+    <Compile Include="Repositories\ManagerRepository.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\InputFile.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="Models\Manager.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryBase.cs" />
+    <Compile Include="Models\SaleItem.cs" />
+    <Compile Include="Repositories\SaleItemRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -62,11 +72,8 @@
       <Project>{8e2de945-919a-43d4-8c56-9824bdcd6726}</Project>
       <Name>SalesModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SalesDataLevel\SalesDataLevel.csproj">
-      <Project>{31662c71-2607-4755-9ef5-7c0c897bec95}</Project>
-      <Name>SalesDataLevel</Name>
-    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
