@@ -12,15 +12,14 @@ namespace SalesSystem
     {
         static void Main(string[] args)
         {
-            SalesDataLevel.IRepository<SalesModel.Product> context = new SalesDataLevel.ProductRepository();
-                        
+            // FileSystemWatcher
+
             string[] lines1 = System.IO.File.ReadAllLines(@".\fileInput.csv");
             string[] lines2 = System.IO.File.ReadAllLines(@".\fileInput1.csv");
 
-            var iii = new SalesBusinessLayer.FilesWoker();
-
-            iii.Work(lines1.ToList(), "fileInput.csv");
-            iii.Work(lines2.ToList(), "454555454");
+            var test = new SalesBusinessLayer.FilesWoker();
+            test.Work(lines1.ToList(), "fileInput.csv");
+            test.Work(lines2.ToList(), "454555454");
 
             Console.ReadKey();
         }
