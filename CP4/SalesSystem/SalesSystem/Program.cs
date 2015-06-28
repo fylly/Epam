@@ -1,4 +1,4 @@
-﻿using SalesModel;
+﻿using SalesBusinessLayer;
 
 using System;
 using System.Collections.Generic;
@@ -13,14 +13,14 @@ namespace SalesSystem
         static void Main(string[] args)
         {
             SalesDataLevel.IRepository<SalesModel.Product> context = new SalesDataLevel.ProductRepository();
+                        
+            string[] lines1 = System.IO.File.ReadAllLines(@".\fileInput.csv");
+            string[] lines2 = System.IO.File.ReadAllLines(@".\fileInput1.csv");
 
-            //context.Add(new SalesModel.Product() { ProductName = "Coca-Cola", Barcode = "0178995445" });
-            //context.SaveChanges();
+            var iii = new SalesBusinessLayer.FilesWoker();
 
-            foreach (var i in context.GetAll())
-            {
-                Console.WriteLine("{0} - {1} \t- {2}", i.Id, i.ProductName, i.Barcode);
-            }
+            iii.Work(lines1.ToList(), "fileInput.csv");
+            iii.Work(lines2.ToList(), "454555454");
 
             Console.ReadKey();
         }

@@ -62,6 +62,10 @@
       <Project>{8e2de945-919a-43d4-8c56-9824bdcd6726}</Project>
       <Name>SalesModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SalesBusinessLayer\SalesBusinessLayer.csproj">
+      <Project>{a57950bb-cfb3-400b-9a6d-9e3960fd3a32}</Project>
+      <Name>SalesBusinessLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SalesDataLevel\SalesDataLevel.csproj">
       <Project>{31662c71-2607-4755-9ef5-7c0c897bec95}</Project>
       <Name>SalesDataLevel</Name>

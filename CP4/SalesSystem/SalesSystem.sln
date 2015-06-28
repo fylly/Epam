@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesModel", "ClassLibrary1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesDataLevel", "SalesDataLevel\SalesDataLevel.csproj", "{31662C71-2607-4755-9EF5-7C0C897BEC95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesBusinessLayer", "SalesBusinessLayer\SalesBusinessLayer.csproj", "{A57950BB-CFB3-400B-9A6D-9E3960FD3A32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{31662C71-2607-4755-9EF5-7C0C897BEC95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31662C71-2607-4755-9EF5-7C0C897BEC95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31662C71-2607-4755-9EF5-7C0C897BEC95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A57950BB-CFB3-400B-9A6D-9E3960FD3A32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A57950BB-CFB3-400B-9A6D-9E3960FD3A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A57950BB-CFB3-400B-9A6D-9E3960FD3A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A57950BB-CFB3-400B-9A6D-9E3960FD3A32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
