@@ -28,7 +28,7 @@ namespace SalesModel
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Manager> Managers { get; set; }
-        public DbSet<SaleItem> SaleItems { get; set; }
         public DbSet<InputFile> InputFiles { get; set; }
+        public DbSet<SaleItem> SaleItems { get; set; }
     }
 }

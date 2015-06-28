@@ -8,12 +8,11 @@
         <EntityTypeShape EntityType="Sales.Customer" Width="1.5" PointX="2" PointY="0.625" />
         <EntityTypeShape EntityType="Sales.Product" Width="1.5" PointX="2" PointY="2.375" />
         <EntityTypeShape EntityType="Sales.Manager" Width="1.5" PointX="2" PointY="4.375" />
-        <EntityTypeShape EntityType="Sales.SaleItem" Width="1.5" PointX="4.875" PointY="1.625" />
-        <AssociationConnector Association="Sales.ClientSaleItem" />
-        <AssociationConnector Association="Sales.GoodsSaleItem" />
-        <AssociationConnector Association="Sales.ManagerSaleItem" ManuallyRouted="false" >
-        </AssociationConnector>
-        <EntityTypeShape EntityType="Sales.InputFile" Width="1.5" PointX="7.125" PointY="4.125" />
+        <EntityTypeShape EntityType="Sales.InputFile" Width="1.5" PointX="7.125" PointY="4.5" />
+        <EntityTypeShape EntityType="Sales.SaleItem" Width="1.5" PointX="4.625" PointY="2.25" />
+        <AssociationConnector Association="Sales.CustomerSaleItem" />
+        <AssociationConnector Association="Sales.ProductSaleItem" />
+        <AssociationConnector Association="Sales.ManagerSaleItem" />
         <AssociationConnector Association="Sales.InputFileSaleItem" />
       </Diagram>
     </edmx:Diagrams>

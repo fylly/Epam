@@ -9,14 +9,14 @@
     <EntitySet Name="Customers" EntityType="Sales.Store.Customers" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Products" EntityType="Sales.Store.Products" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Managers" EntityType="Sales.Store.Managers" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="SaleItems" EntityType="Sales.Store.SaleItems" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="InputFiles" EntityType="Sales.Store.InputFiles" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="ClientSaleItem" Association="Sales.Store.ClientSaleItem">
-      <End Role="Client" EntitySet="Customers" />
+    <EntitySet Name="SaleItems" EntityType="Sales.Store.SaleItems" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CustomerSaleItem" Association="Sales.Store.CustomerSaleItem">
+      <End Role="Customer" EntitySet="Customers" />
       <End Role="SaleItem" EntitySet="SaleItems" />
     </AssociationSet>
-    <AssociationSet Name="GoodsSaleItem" Association="Sales.Store.GoodsSaleItem">
-      <End Role="Goods" EntitySet="Products" />
+    <AssociationSet Name="ProductSaleItem" Association="Sales.Store.ProductSaleItem">
+      <End Role="Product" EntitySet="Products" />
       <End Role="SaleItem" EntitySet="SaleItems" />
     </AssociationSet>
     <AssociationSet Name="ManagerSaleItem" Association="Sales.Store.ManagerSaleItem">
@@ -50,18 +50,6 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ManagerName" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <EntityType Name="SaleItems">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="SaleDate" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SaleSum" Type="float" Nullable="false" />
-    <Property Name="Client_Id" Type="int" Nullable="false" />
-    <Property Name="Good_Id" Type="int" Nullable="false" />
-    <Property Name="Manager_Id" Type="int" Nullable="false" />
-    <Property Name="InputFile_Id" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="InputFiles">
     <Key>
       <PropertyRef Name="Id" />
@@ -69,27 +57,39 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FileTitle" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <Association Name="ClientSaleItem">
-    <End Role="Client" Type="Sales.Store.Customers" Multiplicity="1" />
+  <EntityType Name="SaleItems">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SaleDate" Type="datetime" Nullable="false" />
+    <Property Name="SaleSum" Type="float" Nullable="false" />
+    <Property Name="Customer_Id" Type="int" Nullable="false" />
+    <Property Name="Product_Id" Type="int" Nullable="false" />
+    <Property Name="Manager_Id" Type="int" Nullable="false" />
+    <Property Name="InputFile_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CustomerSaleItem">
+    <End Role="Customer" Type="Sales.Store.Customers" Multiplicity="1" />
     <End Role="SaleItem" Type="Sales.Store.SaleItems" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Client">
+      <Principal Role="Customer">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="SaleItem">
-        <PropertyRef Name="Client_Id" />
+        <PropertyRef Name="Customer_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="GoodsSaleItem">
-    <End Role="Goods" Type="Sales.Store.Products" Multiplicity="1" />
+  <Association Name="ProductSaleItem">
+    <End Role="Product" Type="Sales.Store.Products" Multiplicity="1" />
     <End Role="SaleItem" Type="Sales.Store.SaleItems" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Goods">
+      <Principal Role="Product">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="SaleItem">
-        <PropertyRef Name="Good_Id" />
+        <PropertyRef Name="Product_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -125,20 +125,20 @@
           <EntitySet Name="Customers" EntityType="Sales.Customer" />
           <EntitySet Name="Products" EntityType="Sales.Product" />
           <EntitySet Name="Managers" EntityType="Sales.Manager" />
+          <EntitySet Name="InputFiles" EntityType="Sales.InputFile" />
           <EntitySet Name="SaleItems" EntityType="Sales.SaleItem" />
-          <AssociationSet Name="ClientSaleItem" Association="Sales.ClientSaleItem">
-            <End Role="Client" EntitySet="Customers" />
+          <AssociationSet Name="CustomerSaleItem" Association="Sales.CustomerSaleItem">
+            <End Role="Customer" EntitySet="Customers" />
             <End Role="SaleItem" EntitySet="SaleItems" />
           </AssociationSet>
-          <AssociationSet Name="GoodsSaleItem" Association="Sales.GoodsSaleItem">
-            <End Role="Goods" EntitySet="Products" />
+          <AssociationSet Name="ProductSaleItem" Association="Sales.ProductSaleItem">
+            <End Role="Product" EntitySet="Products" />
             <End Role="SaleItem" EntitySet="SaleItems" />
           </AssociationSet>
           <AssociationSet Name="ManagerSaleItem" Association="Sales.ManagerSaleItem">
             <End Role="Manager" EntitySet="Managers" />
             <End Role="SaleItem" EntitySet="SaleItems" />
           </AssociationSet>
-          <EntitySet Name="InputFiles" EntityType="Sales.InputFile" />
           <AssociationSet Name="InputFileSaleItem" Association="Sales.InputFileSaleItem">
             <End Role="InputFile" EntitySet="InputFiles" />
             <End Role="SaleItem" EntitySet="SaleItems" />
@@ -150,7 +150,7 @@
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="CustomerName" Nullable="false" />
-          <NavigationProperty Name="SaleItems" Relationship="Sales.ClientSaleItem" FromRole="Client" ToRole="SaleItem" />
+          <NavigationProperty Name="SaleItems" Relationship="Sales.CustomerSaleItem" FromRole="Customer" ToRole="SaleItem" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -159,7 +159,7 @@
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="ProductName" Nullable="false" />
           <Property Type="String" Name="Barcode" Nullable="false" />
-          <NavigationProperty Name="SaleItems" Relationship="Sales.GoodsSaleItem" FromRole="Goods" ToRole="SaleItem" />
+          <NavigationProperty Name="SaleItems" Relationship="Sales.ProductSaleItem" FromRole="Product" ToRole="SaleItem" />
         </EntityType>
         <EntityType Name="Manager">
           <Key>
@@ -169,30 +169,6 @@
           <Property Type="String" Name="ManagerName" Nullable="false" />
           <NavigationProperty Name="SaleItems" Relationship="Sales.ManagerSaleItem" FromRole="Manager" ToRole="SaleItem" />
         </EntityType>
-        <EntityType Name="SaleItem">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="SaleDate" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Sales.ClientSaleItem" FromRole="SaleItem" ToRole="Client" />
-          <NavigationProperty Name="Good" Relationship="Sales.GoodsSaleItem" FromRole="SaleItem" ToRole="Goods" />
-          <NavigationProperty Name="Manager" Relationship="Sales.ManagerSaleItem" FromRole="SaleItem" ToRole="Manager" />
-          <NavigationProperty Name="InputFile" Relationship="Sales.InputFileSaleItem" FromRole="SaleItem" ToRole="InputFile" />
-          <Property Type="Double" Name="SaleSum" Nullable="false" />
-        </EntityType>
-        <Association Name="ClientSaleItem">
-          <End Type="Sales.Customer" Role="Client" Multiplicity="1" />
-          <End Type="Sales.SaleItem" Role="SaleItem" Multiplicity="*" />
-        </Association>
-        <Association Name="GoodsSaleItem">
-          <End Type="Sales.Product" Role="Goods" Multiplicity="1" />
-          <End Type="Sales.SaleItem" Role="SaleItem" Multiplicity="*" />
-        </Association>
-        <Association Name="ManagerSaleItem">
-          <End Type="Sales.Manager" Role="Manager" Multiplicity="1" />
-          <End Type="Sales.SaleItem" Role="SaleItem" Multiplicity="*" />
-        </Association>
         <EntityType Name="InputFile">
           <Key>
             <PropertyRef Name="Id" />
@@ -201,6 +177,30 @@
           <Property Type="String" Name="FileTitle" Nullable="false" />
           <NavigationProperty Name="SaleItems" Relationship="Sales.InputFileSaleItem" FromRole="InputFile" ToRole="SaleItem" />
         </EntityType>
+        <EntityType Name="SaleItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Customer" Relationship="Sales.CustomerSaleItem" FromRole="SaleItem" ToRole="Customer" />
+          <NavigationProperty Name="Product" Relationship="Sales.ProductSaleItem" FromRole="SaleItem" ToRole="Product" />
+          <NavigationProperty Name="Manager" Relationship="Sales.ManagerSaleItem" FromRole="SaleItem" ToRole="Manager" />
+          <NavigationProperty Name="InputFile" Relationship="Sales.InputFileSaleItem" FromRole="SaleItem" ToRole="InputFile" />
+          <Property Type="DateTime" Name="SaleDate" Nullable="false" />
+          <Property Type="Double" Name="SaleSum" Nullable="false" />
+        </EntityType>
+        <Association Name="CustomerSaleItem">
+          <End Type="Sales.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="Sales.SaleItem" Role="SaleItem" Multiplicity="*" />
+        </Association>
+        <Association Name="ProductSaleItem">
+          <End Type="Sales.Product" Role="Product" Multiplicity="1" />
+          <End Type="Sales.SaleItem" Role="SaleItem" Multiplicity="*" />
+        </Association>
+        <Association Name="ManagerSaleItem">
+          <End Type="Sales.Manager" Role="Manager" Multiplicity="1" />
+          <End Type="Sales.SaleItem" Role="SaleItem" Multiplicity="*" />
+        </Association>
         <Association Name="InputFileSaleItem">
           <End Type="Sales.InputFile" Role="InputFile" Multiplicity="1" />
           <End Type="Sales.SaleItem" Role="SaleItem" Multiplicity="*" />
@@ -236,6 +236,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="InputFiles">
+      <EntityTypeMapping TypeName="IsTypeOf(Sales.InputFile)">
+        <MappingFragment StoreEntitySet="InputFiles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FileTitle" ColumnName="FileTitle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="SaleItems">
       <EntityTypeMapping TypeName="IsTypeOf(Sales.SaleItem)">
         <MappingFragment StoreEntitySet="SaleItems">
@@ -245,25 +253,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="InputFiles">
-      <EntityTypeMapping TypeName="IsTypeOf(Sales.InputFile)">
-        <MappingFragment StoreEntitySet="InputFiles">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FileTitle" ColumnName="FileTitle" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <AssociationSetMapping Name="ClientSaleItem" TypeName="Sales.ClientSaleItem" StoreEntitySet="SaleItems">
-      <EndProperty Name="Client">
-        <ScalarProperty Name="Id" ColumnName="Client_Id" />
+    <AssociationSetMapping Name="CustomerSaleItem" TypeName="Sales.CustomerSaleItem" StoreEntitySet="SaleItems">
+      <EndProperty Name="Customer">
+        <ScalarProperty Name="Id" ColumnName="Customer_Id" />
       </EndProperty>
       <EndProperty Name="SaleItem">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="GoodsSaleItem" TypeName="Sales.GoodsSaleItem" StoreEntitySet="SaleItems">
-      <EndProperty Name="Goods">
-        <ScalarProperty Name="Id" ColumnName="Good_Id" />
+    <AssociationSetMapping Name="ProductSaleItem" TypeName="Sales.ProductSaleItem" StoreEntitySet="SaleItems">
+      <EndProperty Name="Product">
+        <ScalarProperty Name="Id" ColumnName="Product_Id" />
       </EndProperty>
       <EndProperty Name="SaleItem">
         <ScalarProperty Name="Id" ColumnName="Id" />

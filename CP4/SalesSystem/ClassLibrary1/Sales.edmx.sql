@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 06/23/2015 23:45:41
--- Generated from EDMX file: D:\!Home Data\Documents\CP4\SalesSystem\ClassLibrary1\Sales.edmx
+-- Date Created: 06/28/2015 23:32:08
+-- Generated from EDMX file: D:\!Work\!GitHub-Fylly\Epam\CP4\SalesSystem\ClassLibrary1\Sales.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,37 +17,22 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_ClientSaleItem]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SaleItemSet] DROP CONSTRAINT [FK_ClientSaleItem];
-GO
-IF OBJECT_ID(N'[dbo].[FK_GoodsSaleItem]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SaleItemSet] DROP CONSTRAINT [FK_GoodsSaleItem];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ManagerSaleItem]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SaleItemSet] DROP CONSTRAINT [FK_ManagerSaleItem];
-GO
-IF OBJECT_ID(N'[dbo].[FK_InputFileSaleItem]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SaleItemSet] DROP CONSTRAINT [FK_InputFileSaleItem];
-GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[ClientSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ClientSet];
+IF OBJECT_ID(N'[dbo].[Customers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Customers];
 GO
-IF OBJECT_ID(N'[dbo].[GoodsSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[GoodsSet];
+IF OBJECT_ID(N'[dbo].[Products]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Products];
 GO
-IF OBJECT_ID(N'[dbo].[ManagerSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ManagerSet];
+IF OBJECT_ID(N'[dbo].[Managers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Managers];
 GO
-IF OBJECT_ID(N'[dbo].[SaleItemSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[SaleItemSet];
-GO
-IF OBJECT_ID(N'[dbo].[InputFileSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[InputFileSet];
+IF OBJECT_ID(N'[dbo].[InputFiles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[InputFiles];
 GO
 
 -- --------------------------------------------------
@@ -76,22 +61,22 @@ CREATE TABLE [dbo].[Managers] (
 );
 GO
 
--- Creating table 'SaleItems'
-CREATE TABLE [dbo].[SaleItems] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [SaleDate] nvarchar(max)  NOT NULL,
-    [SaleSum] float  NOT NULL,
-    [Client_Id] int  NOT NULL,
-    [Good_Id] int  NOT NULL,
-    [Manager_Id] int  NOT NULL,
-    [InputFile_Id] int  NOT NULL
-);
-GO
-
 -- Creating table 'InputFiles'
 CREATE TABLE [dbo].[InputFiles] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [FileTitle] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'SaleItems'
+CREATE TABLE [dbo].[SaleItems] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [SaleDate] datetime  NOT NULL,
+    [SaleSum] float  NOT NULL,
+    [Customer_Id] int  NOT NULL,
+    [Product_Id] int  NOT NULL,
+    [Manager_Id] int  NOT NULL,
+    [InputFile_Id] int  NOT NULL
 );
 GO
 
@@ -117,15 +102,15 @@ ADD CONSTRAINT [PK_Managers]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'SaleItems'
-ALTER TABLE [dbo].[SaleItems]
-ADD CONSTRAINT [PK_SaleItems]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
 -- Creating primary key on [Id] in table 'InputFiles'
 ALTER TABLE [dbo].[InputFiles]
 ADD CONSTRAINT [PK_InputFiles]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'SaleItems'
+ALTER TABLE [dbo].[SaleItems]
+ADD CONSTRAINT [PK_SaleItems]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -133,32 +118,32 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [Client_Id] in table 'SaleItems'
+-- Creating foreign key on [Customer_Id] in table 'SaleItems'
 ALTER TABLE [dbo].[SaleItems]
-ADD CONSTRAINT [FK_ClientSaleItem]
-    FOREIGN KEY ([Client_Id])
+ADD CONSTRAINT [FK_CustomerSaleItem]
+    FOREIGN KEY ([Customer_Id])
     REFERENCES [dbo].[Customers]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating non-clustered index for FOREIGN KEY 'FK_ClientSaleItem'
-CREATE INDEX [IX_FK_ClientSaleItem]
+-- Creating non-clustered index for FOREIGN KEY 'FK_CustomerSaleItem'
+CREATE INDEX [IX_FK_CustomerSaleItem]
 ON [dbo].[SaleItems]
-    ([Client_Id]);
+    ([Customer_Id]);
 GO
 
--- Creating foreign key on [Good_Id] in table 'SaleItems'
+-- Creating foreign key on [Product_Id] in table 'SaleItems'
 ALTER TABLE [dbo].[SaleItems]
-ADD CONSTRAINT [FK_GoodsSaleItem]
-    FOREIGN KEY ([Good_Id])
+ADD CONSTRAINT [FK_ProductSaleItem]
+    FOREIGN KEY ([Product_Id])
     REFERENCES [dbo].[Products]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating non-clustered index for FOREIGN KEY 'FK_GoodsSaleItem'
-CREATE INDEX [IX_FK_GoodsSaleItem]
+-- Creating non-clustered index for FOREIGN KEY 'FK_ProductSaleItem'
+CREATE INDEX [IX_FK_ProductSaleItem]
 ON [dbo].[SaleItems]
-    ([Good_Id]);
+    ([Product_Id]);
 GO
 
 -- Creating foreign key on [Manager_Id] in table 'SaleItems'
