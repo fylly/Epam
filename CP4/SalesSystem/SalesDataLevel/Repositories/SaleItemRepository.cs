@@ -5,12 +5,14 @@ using System.Text;
 
 namespace SalesDataLevel
 {
-    public class SaleItemRepository //: IRepository<>
- : RepositoryBase<SalesDataLevel.Models.SaleItem>
+    public class SaleItemRepository 
+ : RepositoryBase<SalesModel.SaleItem>
     {
         public SaleItemRepository()
             : base(new SalesModel.SalesContainer())
         { 
+            
         }
+
     }
 }

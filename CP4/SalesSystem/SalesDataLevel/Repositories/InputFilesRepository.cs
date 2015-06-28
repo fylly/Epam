@@ -6,11 +6,16 @@ using System.Text;
 namespace SalesDataLevel
 {
     public class InputFilesRepository 
-         : RepositoryBase<SalesDataLevel.Models.InputFile>
+         : RepositoryBase<SalesModel.InputFile>
     {
         public InputFilesRepository()
             : base(new SalesModel.SalesContainer())
         {
+        }
+
+        public SalesModel.InputFile GetFileByName(String item)
+        {
+            return base.dbSet.FirstOrDefault(x => x.FileTitle == item);
         }
     }
 }

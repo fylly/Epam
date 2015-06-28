@@ -11,5 +11,10 @@ namespace SalesDataLevel
             : base(new SalesModel.SalesContainer())
         {
         }
+        
+        public SalesModel.Product GetProductByName(String item)
+        {
+            return base.dbSet.FirstOrDefault(x => x.ProductName == item);
+        }
     }
 }

@@ -10,117 +10,44 @@ namespace SalesDataLevel
     public abstract class RepositoryBase<T>: IRepository<T> where T : class
     {
         
-        protected DbSet<T> _DbSet;
-        protected DbContext _DbContext;
+        protected DbSet<T> dbSet;
+        protected DbContext dbContext;
 
         public RepositoryBase(DbContext dataContext)
         {
-            _DbContext = dataContext;
-            _DbSet = _DbContext.Set<T>();
-        } 
-        
-        
-        public void Add(T entity)
-        {
-            _DbSet.Add(entity);
+            dbContext = dataContext;
+            dbSet = dbContext.Set<T>();
         }
 
-        public void Update(T entity)
+
+        public T Add(T entity)
         {
-            _DbSet.Attach(entity);
-            _DbContext.Entry(entity).State = EntityState.Modified;
+            return dbSet.Add(entity);
         }
 
-        public void Delete(T entity)
+        public virtual void Update(T entity)
         {
-            throw new NotImplementedException();
+            dbSet.Attach(entity);
+            dbContext.Entry(entity).State = EntityState.Modified;
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual void Delete(T entity)
         {
-            return _DbSet.ToList();
+            if (dbContext.Entry(entity).State == EntityState.Detached)
+                dbSet.Attach(entity);
+
+            dbSet.Remove(entity);
         }
 
-        public void SaveChanges()
+        public virtual IEnumerable<T> GetAll()
         {
-            _DbContext.SaveChanges();
-        }
- /*
-        //_________________________________________________________________________________________
-        #region IRepository<T> Members
-
-        public T GetById(int id)
-        {
-            return _DbSet.Find(id);
+            return dbSet.ToList();
         }
 
-        public System.Collections.Generic.IEnumerable<T> GetByQuery(Expression<Func<T, bool>> query = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "")
+        public virtual void SaveChanges()
         {
-            IQueryable<T> queryResult = _DbSet;
- 
-            //If there is a query, execute it against the dbset
-            if (query != null)
-            {
-                queryResult = queryResult.Where(query);
-            }
- 
-            //get the include requests for the navigation properties and add them to the query result
-            foreach (var property in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-            {
-                queryResult = queryResult.Include(property);
-            }
- 
-            //if a sort request is made, order the query accordingly.
-            if (orderBy != null)
-            {
-                return orderBy(queryResult).ToList();
-            }
-            //if not, return the results as is
-            else
-            {
-                return queryResult.ToList();
-            }
+            dbContext.SaveChanges();
         }
-
-        public T GetFirst(Expression<Func<T, bool>> predicate)
-        {
-            return _DbSet.First(predicate);
-        }
-
- 
-        public void UpdateById(int id)
-        {
-            T entity = _DbSet.Find(id);
-            _DbSet.Attach(entity);
-            _DbContext.Entry(entity).State = EntityState.Modified;
- 
-        }
- 
-        public void Delete(T entity)
-        {
-            if (_DbContext.Entry(entity).State == EntityState.Detached)
-                _DbSet.Attach(entity);
- 
-            _DbSet.Remove(entity);
-        }
-
-        public void DeleteByID(int id)
-        {
-            T entity = _DbSet.Find(id);
-            _DbSet.Remove(entity);
-        }
- 
-        #endregion
-*/
-
-
-
-
-
-
-
-
-
-       
+      
     }
 }

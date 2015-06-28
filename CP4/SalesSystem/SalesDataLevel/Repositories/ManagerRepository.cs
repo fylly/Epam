@@ -5,11 +5,16 @@ using System.Text;
 
 namespace SalesDataLevel
 {
-    public class ManagerRepository : RepositoryBase<SalesDataLevel.Models.Manager>
+    public class ManagerRepository : RepositoryBase<SalesModel.Manager>
     {
         public ManagerRepository()
             : base(new SalesModel.SalesContainer())
         {
+        }
+
+        public SalesModel.Manager GetManagerByName(String item)
+        {
+            return base.dbSet.FirstOrDefault(x => x.ManagerName == item);
         }
     }
 }
