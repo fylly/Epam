@@ -22,30 +22,25 @@ namespace SalesBusinessLayer
 
         public void Work(List<String> item, String fileName)
         {
-            var cvsParse = SalesBusinessLayer.CSVParser.CSVParser.Parse(item.ToList());
+            var csvParse = SalesBusinessLayer.CSVParser.CSVParser.Parse(item.ToList());
             
             var fileNameSet = (_contextInputFile as SalesDataLevel.InputFilesRepository).GetFileByName(fileName);
-            if (fileNameSet != null)
-            {
-                return;
-            }
-            else
+            if (fileNameSet == null && csvParse.Count() > 0)
             {
                 fileNameSet = _contextInputFile.Add(new SalesModel.InputFile() { FileTitle = fileName });
                 _contextInputFile.SaveChanges();
+                _taskArray = Task.Factory.StartNew(() => NewTask1(csvParse.ToList(), fileNameSet));
             }
-            
-            _taskArray = Task.Factory.StartNew(() => NewTask1(cvsParse.ToList(), fileNameSet));
         }
 
         private void NewTask1(List<SalesBusinessLayer.CSVParser.ParseItem> item,SalesModel.InputFile inputFile)
         {
-            SalesModel.Customer customerSet = null;
-            SalesModel.Product productSet = null;
-            SalesModel.Manager managerSet = null;
-
             foreach (var c in item)
             {
+                var customerSet = new SalesModel.Customer();
+                var productSet = new SalesModel.Product();
+                var managerSet = new SalesModel.Manager();
+
                 lock (_customerOpSync)
                 {
                     customerSet = (_contextCustomer as SalesDataLevel.CustomerRepository).GetCustomerByName(c.CustomerName);
