@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommunicationMethods.cs" />
     <Compile Include="CSVParser\CSVLineParse.cs" />
     <Compile Include="CSVParser\CSVParser.cs" />
     <Compile Include="CSVParser\ParseItem.cs" />
