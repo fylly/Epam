@@ -1,0 +1,26 @@
+﻿@model MvcSalesSystem.Models.EditSalesItem
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "Sales", FormMethod.Post))
+{
+    <table>
+        <tr>
+            @Html.
+            <td>@Html.LabelFor(x=>x.SaleSum)</td> 
+            <td>@Html.TextBoxFor(x=>x.SaleSum)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(x=>x.SaleDate)</td> 
+            <td>@Html.EditorFor(x => x.SaleDate)
+                @Html.ValidationMessageFor(x => x.SaleDate)
+            </td>
+        </tr>        
+    </table>
+    <input type="submit" value="Save" />
+}

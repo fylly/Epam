@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ModelLayer.SaleItem>
+
+@{
+    ViewBag.Title = "ShowAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ShowAll</h2>
+
+<table>
+    <tr>
+        <td>
+            @Html.DisplayName("ID")
+        </td>
+        <td>
+            @Html.DisplayName("SaleDate")
+        </td>
+        <td>
+            @Html.DisplayName("SaleSum")
+        </td>
+        <td>
+            @Html.DisplayName("ProductName")
+        </td>
+        <td>
+            @Html.DisplayName("CustomerName")
+        </td>
+        <td>
+            @Html.DisplayName("ManagerName")
+        </td>
+        <td>
+
+        </td>
+    </tr>
+@foreach (var s in Model){
+    <tr>
+        <td>
+            @s.Id
+        </td>
+        <td>
+            @s.SaleDate
+        </td>
+        <td>
+            @s.SaleSum
+        </td>
+        <td>
+            @s.Product.ProductName
+        </td>
+        <td>
+            @s.Customer.CustomerName
+        </td>
+        <td>
+            @s.Manager.ManagerName
+        </td>
+        <td>
+           @Html.ActionLink("Edit","Edit", new {id = s.Id}) |
+            @Html.ActionLink("Delete","Delete", new {id = s.Id})
+        </td>
+    </tr>
+    
+}
+    </table>
