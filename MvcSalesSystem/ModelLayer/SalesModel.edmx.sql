@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 07/04/2015 17:30:26
--- Generated from EDMX file: D:\!Home Data\Documents\Visual Studio 2012\Projects\MvcSalesSystem\ModelLayer\SalesModel.edmx
+-- Date Created: 07/08/2015 00:36:30
+-- Generated from EDMX file: D:\!Work\!GitHub-Fylly\Epam\MvcSalesSystem\ModelLayer\SalesModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,11 +17,38 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_CustomerSaleItem]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SaleItems] DROP CONSTRAINT [FK_CustomerSaleItem];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProductSaleItem]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SaleItems] DROP CONSTRAINT [FK_ProductSaleItem];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ManagerSaleItem]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SaleItems] DROP CONSTRAINT [FK_ManagerSaleItem];
+GO
+IF OBJECT_ID(N'[dbo].[FK_InputFileSaleItem]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SaleItems] DROP CONSTRAINT [FK_InputFileSaleItem];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[Customers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Customers];
+GO
+IF OBJECT_ID(N'[dbo].[Products]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Products];
+GO
+IF OBJECT_ID(N'[dbo].[Managers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Managers];
+GO
+IF OBJECT_ID(N'[dbo].[InputFiles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[InputFiles];
+GO
+IF OBJECT_ID(N'[dbo].[SaleItems]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SaleItems];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -64,7 +91,7 @@ CREATE TABLE [dbo].[SaleItems] (
     [Customer_Id] int  NOT NULL,
     [Product_Id] int  NOT NULL,
     [Manager_Id] int  NOT NULL,
-    [InputFile_Id] int  NOT NULL
+    [InputFile_Id] int  NULL
 );
 GO
 

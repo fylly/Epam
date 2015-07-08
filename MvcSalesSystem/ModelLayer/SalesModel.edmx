@@ -67,7 +67,7 @@
     <Property Name="Customer_Id" Type="int" Nullable="false" />
     <Property Name="Product_Id" Type="int" Nullable="false" />
     <Property Name="Manager_Id" Type="int" Nullable="false" />
-    <Property Name="InputFile_Id" Type="int" Nullable="false" />
+    <Property Name="InputFile_Id" Type="int" Nullable="true" />
   </EntityType>
   <Association Name="CustomerSaleItem">
     <End Role="Customer" Type="SalesModel.Store.Customers" Multiplicity="1" />
@@ -106,7 +106,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="InputFileSaleItem">
-    <End Role="InputFile" Type="SalesModel.Store.InputFiles" Multiplicity="1" />
+    <End Role="InputFile" Type="SalesModel.Store.InputFiles" Multiplicity="0..1" />
     <End Role="SaleItem" Type="SalesModel.Store.SaleItems" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="InputFile">
@@ -202,7 +202,7 @@
           <End Type="SalesModel.SaleItem" Role="SaleItem" Multiplicity="*" />
         </Association>
         <Association Name="InputFileSaleItem">
-          <End Type="SalesModel.InputFile" Role="InputFile" Multiplicity="1" />
+          <End Type="SalesModel.InputFile" Role="InputFile" Multiplicity="0..1" />
           <End Type="SalesModel.SaleItem" Role="SaleItem" Multiplicity="*" />
         </Association>
       </Schema>
@@ -284,6 +284,7 @@
       <EndProperty Name="SaleItem">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="InputFile_Id" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
