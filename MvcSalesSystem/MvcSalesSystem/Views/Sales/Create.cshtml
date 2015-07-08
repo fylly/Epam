@@ -1,20 +1,18 @@
 ﻿@model MvcSalesSystem.Models.EditSalesItem
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Create</h2>
 
 @using (Html.BeginForm("Save", "Sales", FormMethod.Post))
 {
     @Html.ValidationSummary(true)
+
     <fieldset>
-        <legend>Edit Sale Item</legend>
-
-        @Html.HiddenFor(model => model.Id)
-
+        <legend>EditSalesItem</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Customer)
@@ -38,6 +36,7 @@
             @Html.EditorFor(model => model.SaleDate)
             @Html.ValidationMessageFor(model => model.SaleDate)
         </div>
+
         <div class="editor-label">
             @Html.LabelFor(model => model.SaleSum)
         </div>
@@ -45,6 +44,7 @@
             @Html.EditorFor(model => model.SaleSum)
             @Html.ValidationMessageFor(model => model.SaleSum)
         </div>
+                
         <div class="editor-label">
             @Html.LabelFor(model => model.Manager)
         </div>
@@ -52,11 +52,17 @@
             @Html.DropDownListFor(model=>model.Manager,ViewBag.Manager as SelectList)
             @Html.ValidationMessageFor(model => model.Manager)
         </div>
+
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Create" />
         </p>
     </fieldset>
 }
+
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

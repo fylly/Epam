@@ -31,17 +31,25 @@ namespace MvcSalesSystem.Controllers
             _saleItemRepository = _dalContext.SaleItems;
 
         }
-
+        
+        [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            var saleItem = _saleItemRepository.GetAll().Select(x =>
+                new ListSalesItem()
+                {
+                    Id = x.Id,
+                    SaleDate = x.SaleDate,
+                    SaleSum = x.SaleSum,
+                    Customer = x.Customer.CustomerName,
+                    Manager = x.Manager.ManagerName,
+                    Product = x.Product.ProductName
+                });
+
+            return View(saleItem);
         }
 
-        public ActionResult ShowAll()
-        {
-            return View(_saleItemRepository.GetAll().ToList());
-        }
-
+        [HttpGet]
         public ActionResult Delete(int id)
         {
             var saleItem = _saleItemRepository.GetById(id);
@@ -63,28 +71,66 @@ namespace MvcSalesSystem.Controllers
             {
                 return HttpNotFound();
             }
+            var customers = new SelectList(_customerRepository.GetAll(), "Id", "CustomerName");
+            ViewBag.Customers = customers;
+            var producte = new SelectList(_productRepository.GetAll(), "Id", "ProductName");
+            ViewBag.Producte = producte;
+            var manager = new SelectList(_managerRepository.GetAll(), "Id", "ManagerName");
+            ViewBag.Manager = manager;
 
-            return View(new EditSalesItem() { Id = saleItem.Id, SaleDate = saleItem.SaleDate, SaleSum = saleItem.SaleSum });
+            return View(new EditSalesItem() { Id = saleItem.Id, 
+                SaleDate = saleItem.SaleDate, 
+                SaleSum = saleItem.SaleSum, 
+                Customer=saleItem.Customer.Id, 
+                Product = saleItem.Product.Id,
+                Manager = saleItem.Manager.Id
+            });
         }
-        
+
+        [HttpGet]
+        public ActionResult Create()
+        {            
+            var customers = new SelectList(_customerRepository.GetAll(), "Id", "CustomerName");
+            ViewBag.Customers = customers;
+            var producte = new SelectList(_productRepository.GetAll(), "Id", "ProductName");
+            ViewBag.Producte = producte;
+            var manager = new SelectList(_managerRepository.GetAll(), "Id", "ManagerName");
+            ViewBag.Manager = manager;
+
+            return View();
+        }
+
         [HttpPost]
-        public ActionResult Edit(EditSalesItem item)
+        public ActionResult Save(EditSalesItem item)
         {
-            Console.WriteLine(item.Id);
-
             var saleItem = _saleItemRepository.GetById(item.Id);
-            saleItem.SaleDate = item.SaleDate;
-            saleItem.SaleSum = item.SaleSum;
-
-            _saleItemRepository.Update(saleItem);
-            _saleItemRepository.SaveChanges();
-           /* 
-            var saleItem = _saleItemRepository.GetById(id);
             if (saleItem == null)
             {
-                return HttpNotFound();
+                if (item.Id == default(int))
+                {
+                    saleItem = new ModelLayer.SaleItem();
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
             }
-             */         
+
+            saleItem.SaleDate = item.SaleDate;
+            saleItem.SaleSum = item.SaleSum;
+                        
+            var customer = _customerRepository.GetById(item.Customer);
+            saleItem.Customer = customer;
+
+            var producte = _productRepository.GetById(item.Product);
+            saleItem.Product = producte;
+
+            var manager = _managerRepository.GetById(item.Manager);
+            saleItem.Manager = manager;
+
+            _saleItemRepository.InsertOrUpdate(saleItem);
+            _saleItemRepository.SaveChanges();
+     
             return RedirectToAction("ShowAll", "Sales");
         }
     }

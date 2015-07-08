@@ -166,13 +166,22 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SalesController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ModelLayer\SalesModelContainer\SaleItems.cs" />
+    <Compile Include="ModelLayer\SalesModelContainer_ModelLayer\SalesModelContainer_.cs" />
+    <Compile Include="ModelLayer\SalesModelContainer__\SaleItems.cs" />
+    <Compile Include="ModelLayer\SalesModelContainer__\SaleItems__.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Models\ManagerModel.cs" />
+    <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\SalesModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -287,8 +296,15 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Sales\ShowAll.cshtml" />
     <Content Include="Views\Sales\Edit.cshtml" />
+    <Content Include="Views\Sales\Create.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Create.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\Sales\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

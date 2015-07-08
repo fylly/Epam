@@ -21,7 +21,12 @@
                     </section>
                     <nav>
                         <ul id="menu">
-                            <li>@Html.ActionLink("Все продажи", "ShowAll", "Sales")</li>
+
+                            <li>@Html.ActionLink("Sales", "Index", "Sales")</li>
+                            <li>@Html.ActionLink("Products", "Index", "Product")</li>
+                            <li>@Html.ActionLink("Customers", "Index", "Customer")</li>
+                            <li>@Html.ActionLink("Managers", "Index", "Manager")</li>
+
                             <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
                             <li>@Html.ActionLink("О программе", "About", "Home")</li>
                             <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
