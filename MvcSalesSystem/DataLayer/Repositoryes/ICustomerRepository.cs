@@ -7,6 +7,7 @@ namespace DataLayer
 {
     public interface ICustomerRepository : IRepository<ModelLayer.Customer>
     {
-        ModelLayer.Customer GetCustomerByName( string item);
+        ModelLayer.Customer GetById(int item);
+        void InsertOrUpdate(ModelLayer.Customer item);
     }
 }

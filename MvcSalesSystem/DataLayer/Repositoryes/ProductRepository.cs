@@ -13,9 +13,21 @@ namespace DataLayer
         {
         }
 
-        public ModelLayer.Product GetProductByName(string item)
+        public void InsertOrUpdate(ModelLayer.Product item)
         {
-            return base.dbSet.FirstOrDefault(x => x.ProductName == item);
+            if (item.Id == default(int))
+            {
+                Add(item);
+            }
+            else
+            {
+                Update(item);
+            };
+        }
+
+        public ModelLayer.Product GetById(int item)
+        {
+            return base.dbSet.FirstOrDefault(x=>x.Id == item);
         }
     }
 }

@@ -40,7 +40,7 @@ namespace DataLayer
 
         public virtual IEnumerable<T> GetAll()
         {
-            return dbSet.ToList();
+            return dbSet;
         }
 
         public virtual void SaveChanges()

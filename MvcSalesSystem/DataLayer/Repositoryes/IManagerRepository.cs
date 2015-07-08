@@ -8,5 +8,6 @@ namespace DataLayer
     public interface IManagerRepository : IRepository<ModelLayer.Manager>
     {
         ModelLayer.Manager GetManagerByName(string item);
+        ModelLayer.Manager GetById(int item);
     }
 }

@@ -12,11 +12,23 @@ namespace DataLayer
         public CustomerRepository(DbContext dataContext)
             : base(dataContext)
         {
-
         }
-        public ModelLayer.Customer GetCustomerByName(string item)
+
+        public ModelLayer.Customer GetById(int item)
         {
-            return base.dbSet.FirstOrDefault(x => x.CustomerName == item);
+            return base.dbSet.FirstOrDefault(x => x.Id == item);
+        }
+
+        public void InsertOrUpdate(ModelLayer.Customer item)
+        {
+            if (item.Id == default(int))
+            {
+                Add(item);
+            }
+            else
+            {
+                Update(item);
+            };
         }
     }
 }

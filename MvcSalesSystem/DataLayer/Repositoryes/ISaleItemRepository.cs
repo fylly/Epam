@@ -8,5 +8,6 @@ namespace DataLayer
     public interface ISaleItemRepository : IRepository<ModelLayer.SaleItem>
     {
         ModelLayer.SaleItem GetById(int item);
+        void InsertOrUpdate (ModelLayer.SaleItem item);
     }
 }

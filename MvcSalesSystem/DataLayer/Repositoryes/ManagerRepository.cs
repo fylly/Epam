@@ -17,5 +17,11 @@ namespace DataLayer
         {
             return base.dbSet.FirstOrDefault(x => x.ManagerName == item);
         }
+
+
+        public ModelLayer.Manager GetById(int item)
+        {
+            return base.dbSet.FirstOrDefault(x => x.Id == item);
+        }
     }
 }

@@ -7,6 +7,7 @@ namespace DataLayer
 {
     public interface IProductRepository : IRepository<ModelLayer.Product>
     {
-        ModelLayer.Product GetProductByName(string item);
+        ModelLayer.Product GetById(int item);
+        void InsertOrUpdate(ModelLayer.Product item);
     }
 }
