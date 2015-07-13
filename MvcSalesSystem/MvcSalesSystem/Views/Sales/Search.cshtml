@@ -1,0 +1,28 @@
+﻿@model MvcSalesSystem.Models.SalesSearchModel
+
+@{
+    ViewBag.Title = "Search Sales";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Search Sales</h2>
+@if (Model == null)
+{
+    <div id="SearchModel">
+        @Html.Partial("_Search")
+    </div>
+}
+else
+{
+    <div id="SearchModel">
+        @Html.Partial("_Search",Model.SerchForm)
+    </div>
+    <div id="listModel">
+        @Html.Partial("_SalesList", Model.ListSales)
+    </div>
+
+    
+}
+
+
+

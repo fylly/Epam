@@ -1,0 +1,22 @@
+﻿@model MvcSalesSystem.Models.EditManagerItem
+
+@using (Html.BeginForm("Save", "Manager", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Edit Manager Item</legend>
+
+        @Html.HiddenFor(model => model.Id)
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ManagerName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ManagerName)
+            @Html.ValidationMessageFor(model => model.ManagerName)
+        </div>        
+        <p>
+            <input type="submit" value="Save" /> | @Html.ActionLink("Back to List", "Index")
+        </p>
+    </fieldset>
+}

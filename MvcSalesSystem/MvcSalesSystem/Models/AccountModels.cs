@@ -27,6 +27,15 @@ namespace MvcSalesSystem.Models
         public string UserName { get; set; }
     }
 
+    public class ListUsers
+    {
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
+
+        [Display(Name = "User role")]
+        public string UserRole { get; set; }
+    }
+
     public class RegisterExternalLoginModel
     {
         [Required]

@@ -8,7 +8,7 @@ namespace MvcSalesSystem.Models
 {
     public class ListCustomerItem
     {
-
+        [Display(Name = "Id")]
         public int Id { get; set; }
 
         [Required]

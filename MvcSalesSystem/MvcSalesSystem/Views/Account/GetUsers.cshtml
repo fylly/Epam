@@ -1,0 +1,10 @@
+﻿@model IEnumerable<MvcSalesSystem.Models.ListUsers>
+
+@{
+    ViewBag.Title = "GetUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GetUsers</h2>
+
+@Html.Partial("_GetUsersPartial",Model)

@@ -6,11 +6,13 @@ using System.Web.Mvc;
 
 namespace MvcSalesSystem.Controllers
 {
+    
     public class HomeController : Controller
     {
+
         public ActionResult Index()
         {
-            ViewBag.Message = "1Измените этот шаблон, чтобы быстро приступить к работе над приложением ASP.NET MVC.";
+            ViewBag.Message = "Измените этот шаблон, чтобы быстро приступить к работе над приложением ASP.NET MVC.";
 
             return View();
         }
@@ -18,13 +20,6 @@ namespace MvcSalesSystem.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Страница описания приложения.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Страница контактов.";
 
             return View();
         }

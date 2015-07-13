@@ -1,9 +1,12 @@
 ﻿@model MvcSalesSystem.Models.EditSalesItem
-
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 
 <h2>Create</h2>
 
@@ -11,7 +14,7 @@
 {
     @Html.ValidationSummary(true)
 
-    <fieldset>
+    <fieldset id="modelForm">
         <legend>EditSalesItem</legend>
 
         <div class="editor-label">
@@ -22,13 +25,12 @@
             @Html.ValidationMessageFor(model => model.Customer)
         </div>
         <div class="editor-label">
-            @Html.LabelFor(model => model.Product)
+            @Html.LabelFor(model => model.Manager)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model=>model.Product,ViewBag.Producte as SelectList)
-            @Html.ValidationMessageFor(model => model.Product)
+            @Html.DropDownListFor(model=>model.Manager,(SelectList) ViewBag.Manager)
+            @Html.ValidationMessageFor(model => model.Manager)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.SaleDate)
         </div>
@@ -38,25 +40,27 @@
         </div>
 
         <div class="editor-label">
+            @Html.LabelFor(model => model.Product)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model=>model.Product,(SelectList) ViewBag.Producte)
+            @Html.ValidationMessageFor(model => model.Product)
+        </div>
+        <div class="editor-label">
             @Html.LabelFor(model => model.SaleSum)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.SaleSum)
             @Html.ValidationMessageFor(model => model.SaleSum)
         </div>
-                
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Manager)
-        </div>
-        <div class="editor-field">
-            @Html.DropDownListFor(model=>model.Manager,ViewBag.Manager as SelectList)
-            @Html.ValidationMessageFor(model => model.Manager)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
+        
     </fieldset>
+    <p>
+        <input type="button" id ="ProducteFill" />
+    </p>
+    <p>
+        <input type="submit" value="Create" />
+    </p>
 }
 
 <div>
@@ -65,4 +69,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+
 }

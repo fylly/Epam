@@ -6,9 +6,36 @@ using System.Web;
 
 namespace MvcSalesSystem.Models
 {
+    public class SalesSearchModel
+    {
+        public SalesSearchForm SerchForm { get; set; }
+        public IEnumerable<ListSalesItem> ListSales { get; set; }
+    }
+
+    public class SalesSearchForm
+    {
+        [Display(Name = "Product")]
+        public string Product { get; set; }
+
+        [Display(Name = "Customer")]
+        public string Customer { get; set; }
+
+        [Display(Name = "Manager")]
+        public string Manager { get; set; }
+
+        [Display(Name = "Search type")]
+        public int SearchDateType { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Sale Date")]
+        public DateTime SaleDate { get; set; }
+    }
+
+
     public class EditSalesItem
     {
-        [Required]
+        [Display(Name = "Id")]
         public int Id { get; set; }
 
         [Required]
@@ -38,6 +65,7 @@ namespace MvcSalesSystem.Models
 
     public class ListSalesItem
     {
+        [Display(Name = "Id")]
         public int Id;
 
         [Required]

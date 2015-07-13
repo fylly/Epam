@@ -34,13 +34,10 @@
         </ol>
         <input type="submit" value="Выполнить вход" />
     </fieldset>
-    <p>
-        @Html.ActionLink("Register", "Register"), если у вас нет учетной записи.
-    </p>
 }
 </section>
 
-<section class="social" id="socialLoginForm">
+<section id="socialLoginForm">
     <h2>Используйте для входа другую службу.</h2>
     @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
 </section>

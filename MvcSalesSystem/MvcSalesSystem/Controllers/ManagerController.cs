@@ -9,55 +9,53 @@ using System.Web.Mvc;
 namespace MvcSalesSystem.Controllers
 {
     [Authorize]
-    public class ProductController : Controller
+    public class ManagerController : Controller
     {
         private DALContext _dalContext;
-        private IProductRepository _productRepository;
+        private IManagerRepository _managerRepository;
 
-        public ProductController()
+        public ManagerController()
         {
             _dalContext = new DALContext();
-            _productRepository = _dalContext.Products;
+            _managerRepository = _dalContext.Managers;
         }
 
-        [HttpGet]    
+        [HttpGet]
         public ActionResult Index()
         {
-            var productItem = _productRepository.GetAll().Select(x =>
-                new ListProductItem()
-                {
+            var managerItem = _managerRepository.GetAll().Select(x => 
+                new ListManagerItem() 
+                { 
                     Id = x.Id,
-                    ProductName = x.ProductName,
-                    Barcode = x.Barcode
+                    ManagerName = x.ManagerName
                 });
 
-            return View(productItem);
+            return View(managerItem);
         }
 
         [HttpGet]
         [Authorize(Roles = "admin")]
         public ActionResult Edit(int id)
         {
-            var producteItem = _productRepository.GetById(id);
-            if (producteItem == null)
+            var managerItem = _managerRepository.GetById(id);
+            if (managerItem == null)
             {
                 return View("Error");
             }
-
-            var editProductItem = new EditProductItem()
-                {
-                    Id = producteItem.Id,
-                    ProductName = producteItem.ProductName,
-                    Barcode = producteItem.Barcode
-                };
+            
+            var editManagerItem = new EditManagerItem()
+            {
+                Id = managerItem.Id,
+                ManagerName = managerItem.ManagerName
+            };
 
             if (Request.IsAjaxRequest())
             {
-                return PartialView("_Edit", editProductItem);
+                return PartialView("_Edit", editManagerItem);
             }
-            return View(editProductItem);
+            return View("Edit", editManagerItem);
         }
-        
+
         [HttpGet]
         [Authorize(Roles = "admin")]
         public ActionResult Create()
@@ -65,9 +63,10 @@ namespace MvcSalesSystem.Controllers
             return View();
         }
 
+       
         [HttpPost]
         [Authorize(Roles = "admin")]
-        public ActionResult Save(EditProductItem item)
+        public ActionResult Save(EditManagerItem item)
         {
             try
             {
@@ -75,24 +74,23 @@ namespace MvcSalesSystem.Controllers
                 {
                     return View("Error");
                 }
-                var productItem = _productRepository.GetById(item.Id);
-                if (productItem == null)
+                var managerItem = _managerRepository.GetById(item.Id);
+                if (managerItem == null)
                 {
                     if (item.Id == default(int))
                     {
-                        productItem = new ModelLayer.Product();
+                        managerItem = new ModelLayer.Manager();
                     }
                     else
                     {
-                        return HttpNotFound();
+                        return View("Error");
                     }
                 }
 
-                productItem.ProductName = item.ProductName;
-                productItem.Barcode = item.Barcode;
+                managerItem.ManagerName = item.ManagerName;
 
-                _productRepository.InsertOrUpdate(productItem);
-                _productRepository.SaveChanges();
+                _managerRepository.InsertOrUpdate(managerItem);
+                _managerRepository.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -108,19 +106,19 @@ namespace MvcSalesSystem.Controllers
         {
             try
             {
-                var productItem = _productRepository.GetById(id);
+                var productItem = _managerRepository.GetById(id);
                 if (productItem == null)
                 {
                     return View("Error");
                 }
-
                 if (productItem.SaleItem.Any())
                 {
                     return View("Error");
                 }
 
-                _productRepository.Delete(productItem);
-                _productRepository.SaveChanges();
+                _managerRepository.Delete(productItem);
+                _managerRepository.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             catch

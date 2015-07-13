@@ -13,7 +13,7 @@
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("ваша эмблема здесь", "Index", "Home")</p>
+                    <p class="site-title">@Html.ActionLink("SALES SYSTEM", "Index", "Home")</p>
                 </div>
                 <div class="float-right">
                     <section id="login">
@@ -21,15 +21,15 @@
                     </section>
                     <nav>
                         <ul id="menu">
-
-                            <li>@Html.ActionLink("Sales", "Index", "Sales")</li>
-                            <li>@Html.ActionLink("Products", "Index", "Product")</li>
-                            <li>@Html.ActionLink("Customers", "Index", "Customer")</li>
-                            <li>@Html.ActionLink("Managers", "Index", "Manager")</li>
-
-                            <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
-                            <li>@Html.ActionLink("О программе", "About", "Home")</li>
-                            <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            @if (Request.IsAuthenticated) {
+                                <li>@Html.ActionLink("Sales", "Index", "Sales")</li>
+                                <li>@Html.ActionLink("Products", "Index", "Product")</li>
+                                <li>@Html.ActionLink("Customers", "Index", "Customer")</li>
+                                <li>@Html.ActionLink("Managers", "Index", "Manager")</li>
+                            }
+                            <li>@Html.ActionLink("Settigs", "Index", "Account")</li>
                         </ul>
                     </nav>
                 </div>

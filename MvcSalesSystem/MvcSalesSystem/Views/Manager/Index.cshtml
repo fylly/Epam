@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MvcSalesSystem.Models.ListCustomerItem>
+﻿@model IEnumerable<MvcSalesSystem.Models.ListManagerItem>
 
 @{
     ViewBag.Title = "Index";
@@ -10,19 +10,19 @@
 
 <h2>Index</h2>
 
-<div id="divEditCustomer"></div>
+ <div id="divEditManager"></div>
 
 @if (User.IsInRole("admin"))
 {
     <p>
         @Html.ActionLink("Create New", "Create")
-    </p>
+    </p>        
 }
 
 <table>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CustomerName)
+            @Html.DisplayNameFor(model => model.ManagerName)
         </th>
         @if (User.IsInRole("admin"))
         {
@@ -33,17 +33,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.CustomerName)
+            @Html.DisplayFor(modelItem => item.ManagerName)
         </td>
         @if (User.IsInRole("admin"))
         {
             <td>
-                @Ajax.ActionLink("Edit", "Edit", new { id = item.Id }, new AjaxOptions() { HttpMethod = "Get", UpdateTargetId = "divEditCustomer", InsertionMode = InsertionMode.Replace }) |
+                @Ajax.ActionLink("Edit", "Edit", new { id = item.Id }, new AjaxOptions() { HttpMethod = "Get", UpdateTargetId = "divEditManager", InsertionMode = InsertionMode.Replace }) |
                 @Html.ActionLink("Delete", "Delete", new { id=item.Id })
             </td>
         }
         
     </tr>
 }
-
 </table>

@@ -8,10 +8,9 @@ using System.Web.Mvc;
 
 namespace MvcSalesSystem.Controllers
 {
+    [Authorize]
     public class CustomerController : Controller
-    {
-        //
-        // GET: /Customer/
+    {        
         private DALContext _dalContext;
         private ICustomerRepository _customerRepository;
 
@@ -20,6 +19,7 @@ namespace MvcSalesSystem.Controllers
             _dalContext = new DALContext();
             _customerRepository = _dalContext.Customers;
         }
+
 
         [HttpGet]
         public ActionResult Index()
@@ -33,47 +33,10 @@ namespace MvcSalesSystem.Controllers
 
             return View(customerItem);
         }
-                
-        //
-        // GET: /Customer/Create
+       
 
         [HttpGet]
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Customer/Create
-
-        [HttpPost]
-        public ActionResult Save(EditCustomerItem item)
-        {
-            var customerItem = _customerRepository.GetById(item.Id);
-            if (customerItem == null)
-            {
-                if (item.Id == default(int))
-                {
-                    customerItem = new ModelLayer.Customer();
-                }
-                else
-                {
-                    return HttpNotFound();
-                }
-            }
-
-            customerItem.CustomerName = item.CustomerName;
-
-            _customerRepository.InsertOrUpdate(customerItem);
-            _customerRepository.SaveChanges();
-
-            return RedirectToAction("Index");
-        }
-
-        //
-        // GET: /Customer/Edit/5
-
-        [HttpGet]
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int id)
         {
             var customerItem = _customerRepository.GetById(id);
@@ -82,26 +45,89 @@ namespace MvcSalesSystem.Controllers
                 return HttpNotFound();
             }
 
-            return View(new EditCustomerItem()
+            var editCustomerItem = new EditCustomerItem()
             {
                 Id = customerItem.Id,
                 CustomerName = customerItem.CustomerName
-            });
+            };
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Edit", editCustomerItem);
+            }
+            return View("Edit", editCustomerItem);
         }
 
-        //
-        // POST: /Customer/Edit/5
-                
-        //
-        // GET: /Customer/Delete/5
 
-        public ActionResult Delete(int id)
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public ActionResult Create()
         {
             return View();
         }
 
-        //
-        // POST: /Customer/Delete/5
-                
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public ActionResult Save(EditCustomerItem item)
+        {
+            try
+            {
+                if (item == null)
+                {
+                    return View("Error");
+                }
+                var customerItem = _customerRepository.GetById(item.Id);
+                if (customerItem == null)
+                {
+                    if (item.Id == default(int))
+                    {
+                        customerItem = new ModelLayer.Customer();
+                    }
+                    else
+                    {
+                        return View("Error");
+                    }
+                }
+
+                customerItem.CustomerName = item.CustomerName;
+
+                _customerRepository.InsertOrUpdate(customerItem);
+                _customerRepository.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View("Error");
+            }
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                var productItem = _customerRepository.GetById(id);
+                if (productItem == null)
+                {
+                    return View("Error");
+                }
+                if (productItem.SaleItem.Any())
+                {
+                    return View("Error");
+                }
+
+                _customerRepository.Delete(productItem);
+                _customerRepository.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View("Error");
+            }
+        }
     }
 }

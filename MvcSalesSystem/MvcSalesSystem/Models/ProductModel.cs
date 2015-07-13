@@ -8,7 +8,7 @@ namespace MvcSalesSystem.Models
 {
     public class ListProductItem
     {
-
+        [Display(Name = "Id")]
         public int Id { get; set; }
 
         [Required]
@@ -22,6 +22,7 @@ namespace MvcSalesSystem.Models
 
     public class EditProductItem
     {
+        [Display(Name = "Id")]
         public int Id { get; set; }
 
         [Required]

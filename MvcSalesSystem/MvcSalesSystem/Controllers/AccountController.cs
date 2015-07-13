@@ -20,6 +20,29 @@ namespace MvcSalesSystem.Controllers
         //
         // GET: /Account/Login
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "admin")]
+        public ActionResult GetUsers()
+        {
+            IEnumerable<ListUsers> result;
+            using (var db = WebMatrix.Data.Database.Open("DefaultConnection"))
+            {
+                var users = db.Query("SELECT * FROM UserProfile"); //LEFT OUTER JOIN webpages_UsersInRoles ON UserProfile.UserId = webpages_UsersInRoles.UserId");
+                result = users.Select(x => new ListUsers() { UserName = x[1], UserRole = x[1] });
+            }
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_GetUsersPartial",result);
+            }
+            return View(result);
+        }
+
+
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -60,9 +83,13 @@ namespace MvcSalesSystem.Controllers
         //
         // GET: /Account/Register
 
-        [AllowAnonymous]
+        [Authorize(Roles = "admin")]
         public ActionResult Register()
         {
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_RegisterPartial");
+            }
             return View();
         }
 
@@ -70,7 +97,7 @@ namespace MvcSalesSystem.Controllers
         // POST: /Account/Register
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
@@ -80,8 +107,8 @@ namespace MvcSalesSystem.Controllers
                 try
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    //WebSecurity.Login(model.UserName, model.Password);
+                    return RedirectToAction("Index", "Account");
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -132,7 +159,21 @@ namespace MvcSalesSystem.Controllers
                 : message == ManageMessageId.SetPasswordSuccess ? "Пароль задан."
                 : message == ManageMessageId.RemoveLoginSuccess ? "Внешняя учетная запись удалена."
                 : "";
-            ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+
+            var hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            if (Request.IsAjaxRequest())
+            {
+                if (hasLocalAccount)
+                {
+                    return PartialView("_ChangePasswordPartial");
+                }
+                else
+                {
+                    return PartialView("_SetPasswordPartial");
+                }
+            }
+
+            ViewBag.HasLocalPassword = hasLocalAccount;
             ViewBag.ReturnUrl = Url.Action("Manage");
             return View();
         }
@@ -164,7 +205,7 @@ namespace MvcSalesSystem.Controllers
 
                     if (changePasswordSucceeded)
                     {
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                        return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
                     }
                     else
                     {

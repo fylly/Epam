@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MvcSalesSystem.Models.ListSalesItem>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Product)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Manager)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SaleDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SaleSum)
+        </th>
+        @if (User.IsInRole("admin"))
+        {
+            <th></th>
+        }
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Manager)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SaleDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SaleSum)
+        </td>
+        @if (User.IsInRole("admin"))
+        {
+            <td>
+                @Ajax.ActionLink("Edit", "Edit", new { id = item.Id }, new AjaxOptions() { HttpMethod = "Get", UpdateTargetId = "divSpecial", InsertionMode = InsertionMode.Replace }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+           </td>
+        }
+    </tr>
+}
+</table>

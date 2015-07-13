@@ -1,6 +1,7 @@
 ﻿@model MvcSalesSystem.Models.LocalPasswordModel
+
 @{
-    ViewBag.Title = "Управление учетной записью";
+    ViewBag.Title = "Account manage";
 }
 
 <hgroup class="title">
@@ -18,15 +19,4 @@
 else
 { 
     @Html.Partial("_SetPasswordPartial")
-}
-
-<section id="externalLogins">
-    @Html.Action("RemoveExternalLogins")
-
-    <h3>Добавить внешнюю учетную запись</h3>
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }
