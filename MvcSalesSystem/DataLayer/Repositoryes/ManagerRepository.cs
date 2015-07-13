@@ -13,15 +13,21 @@ namespace DataLayer
         {
         }
 
-        public ModelLayer.Manager GetManagerByName(string item)
-        {
-            return base.dbSet.FirstOrDefault(x => x.ManagerName == item);
-        }
-
-
         public ModelLayer.Manager GetById(int item)
         {
             return base.dbSet.FirstOrDefault(x => x.Id == item);
+        }
+        
+        public void InsertOrUpdate(ModelLayer.Manager item)
+        {
+            if (item.Id == default(int))
+            {
+                Add(item);
+            }
+            else
+            {
+                Update(item);
+            };
         }
     }
 }
