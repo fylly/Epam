@@ -34,6 +34,39 @@ namespace MvcSalesSystem.Controllers
             return View(productItem);
         }
 
+
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public ActionResult Create(EditProductItem item)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var productItem = new ModelLayer.Product() { ProductName = item.ProductName, Barcode = item.Barcode};
+
+                    _productRepository.InsertOrUpdate(productItem);
+                    _productRepository.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    ViewBag.MessageError = "Data error"; 
+                }
+            }
+            return View();
+        }
+
+
         [HttpGet]
         [Authorize(Roles = "admin")]
         public ActionResult Edit(int id)
@@ -58,48 +91,31 @@ namespace MvcSalesSystem.Controllers
             return View(editProductItem);
         }
         
-        [HttpGet]
-        [Authorize(Roles = "admin")]
-        public ActionResult Create()
-        {
-            return View();
-        }
 
         [HttpPost]
         [Authorize(Roles = "admin")]
-        public ActionResult Save(EditProductItem item)
+        public ActionResult Edit(EditProductItem item)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (item == null)
+                try
                 {
-                    return View("Error");
+                    var productItem = _productRepository.GetById(item.Id);
+                    
+                    productItem.ProductName = item.ProductName;
+                    productItem.Barcode = item.Barcode;
+
+                    _productRepository.InsertOrUpdate(productItem);
+                    _productRepository.SaveChanges();
+
+                    return RedirectToAction("Index");
                 }
-                var productItem = _productRepository.GetById(item.Id);
-                if (productItem == null)
+                catch
                 {
-                    if (item.Id == default(int))
-                    {
-                        productItem = new ModelLayer.Product();
-                    }
-                    else
-                    {
-                        return HttpNotFound();
-                    }
+                    ViewBag.MessageError = "Data error"; 
                 }
-
-                productItem.ProductName = item.ProductName;
-                productItem.Barcode = item.Barcode;
-
-                _productRepository.InsertOrUpdate(productItem);
-                _productRepository.SaveChanges();
-
-                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View("Error");
-            }
+            return View();
         }
 
         [HttpGet]
@@ -109,24 +125,19 @@ namespace MvcSalesSystem.Controllers
             try
             {
                 var productItem = _productRepository.GetById(id);
-                if (productItem == null)
+                if (productItem != null && !productItem.SaleItem.Any())
                 {
-                    return View("Error");
-                }
-
-                if (productItem.SaleItem.Any())
-                {
-                    return View("Error");
-                }
-
-                _productRepository.Delete(productItem);
-                _productRepository.SaveChanges();
-                return RedirectToAction("Index");
+                    _productRepository.Delete(productItem);
+                    _productRepository.SaveChanges();
+                    return RedirectToAction("Index");
+                }               
             }
             catch
             {
-                return View("Error");
+                ViewBag.MessageError = "Data error"; 
             }
+            return View("Error");
         }
+        
     }
 }

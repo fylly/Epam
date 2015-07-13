@@ -33,6 +33,39 @@ namespace MvcSalesSystem.Controllers
             return View(managerItem);
         }
 
+
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public ActionResult Create(EditManagerItem item)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var managerItem = new ModelLayer.Manager() { ManagerName = item.ManagerName };
+
+                    _managerRepository.InsertOrUpdate(managerItem);
+                    _managerRepository.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    ViewBag.MessageError = "Data error"; 
+                }
+            }
+            return View();
+        }
+
+        
         [HttpGet]
         [Authorize(Roles = "admin")]
         public ActionResult Edit(int id)
@@ -56,49 +89,35 @@ namespace MvcSalesSystem.Controllers
             return View("Edit", editManagerItem);
         }
 
-        [HttpGet]
-        [Authorize(Roles = "admin")]
-        public ActionResult Create()
-        {
-            return View();
-        }
+
+        
 
        
         [HttpPost]
         [Authorize(Roles = "admin")]
-        public ActionResult Save(EditManagerItem item)
+        public ActionResult Edit(EditManagerItem item)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (item == null)
+                try
                 {
-                    return View("Error");
+                    var managerItem = _managerRepository.GetById(item.Id);
+                    
+                    managerItem.ManagerName = item.ManagerName;
+
+                    _managerRepository.InsertOrUpdate(managerItem);
+                    _managerRepository.SaveChanges();
+
+                    return RedirectToAction("Index");
                 }
-                var managerItem = _managerRepository.GetById(item.Id);
-                if (managerItem == null)
+                catch
                 {
-                    if (item.Id == default(int))
-                    {
-                        managerItem = new ModelLayer.Manager();
-                    }
-                    else
-                    {
-                        return View("Error");
-                    }
+                    ViewBag.MessageError = "Data error"; 
                 }
-
-                managerItem.ManagerName = item.ManagerName;
-
-                _managerRepository.InsertOrUpdate(managerItem);
-                _managerRepository.SaveChanges();
-
-                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View("Error");
-            }
+            return View();
         }
+
 
         [HttpGet]
         [Authorize(Roles = "admin")]
@@ -107,24 +126,19 @@ namespace MvcSalesSystem.Controllers
             try
             {
                 var productItem = _managerRepository.GetById(id);
-                if (productItem == null)
+                if (productItem != null && !productItem.SaleItem.Any())
                 {
-                    return View("Error");
-                }
-                if (productItem.SaleItem.Any())
-                {
-                    return View("Error");
-                }
+                    _managerRepository.Delete(productItem);
+                    _managerRepository.SaveChanges();
 
-                _managerRepository.Delete(productItem);
-                _managerRepository.SaveChanges();
-
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
             }
             catch
             {
-                return View("Error");
+                ViewBag.MessageError = "Data error"; 
             }
+            return View("Error");
         }
     }
 }

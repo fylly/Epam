@@ -18,10 +18,10 @@ namespace MvcSalesSystem.Models
         public string Product { get; set; }
 
         [Display(Name = "Customer")]
-        public string Customer { get; set; }
+        public int Customer { get; set; }
 
         [Display(Name = "Manager")]
-        public string Manager { get; set; }
+        public int Manager { get; set; }
 
         [Display(Name = "Search type")]
         public int SearchDateType { get; set; }
@@ -47,7 +47,6 @@ namespace MvcSalesSystem.Models
         [Required]
         [Display(Name = "Sale Sum")]
         [DisplayFormat(DataFormatString = "{0:0.##}", ApplyFormatInEditMode = true)]
-        [Range(typeof(decimal), "0,01", "9999999999", ErrorMessage = "Введите сумму, в качестве разделителя дробной и целой части используется запятая")]
         public double SaleSum { get; set; }
 
         [Required]

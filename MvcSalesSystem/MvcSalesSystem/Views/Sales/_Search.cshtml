@@ -3,7 +3,6 @@
 @{
     ViewBag.SearchParam = new SelectList(
         new List<Object>{
-            new { value = 0, text = "none" },
             new { value = 1, text = ">" },
             new { value = 2, text = "=" },
             new { value = 3, text = "<" }
@@ -29,21 +28,21 @@
             @Html.LabelFor(model=> model.Customer)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model=> model.Customer)
+            @Html.DropDownListFor(model=>model.Customer,(SelectList) ViewBag.Customers, string.Empty)
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model=> model.Manager)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model=> model.Manager)
+            @Html.DropDownListFor(model=>model.Manager,(SelectList) ViewBag.Manager, string.Empty)
         </div>
         
         <div class="editor-label">
             @Html.LabelFor(model=> model.SaleDate)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model=>model.SearchDateType, (SelectList) ViewBag.SearchParam)
+            @Html.DropDownListFor(model=>model.SearchDateType, (SelectList) ViewBag.SearchParam, "none")
             @Html.EditorFor(model=> model.SaleDate)
         </div>       
 

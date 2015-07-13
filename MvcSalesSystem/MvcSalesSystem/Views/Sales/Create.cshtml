@@ -10,7 +10,7 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm("Save", "Sales", FormMethod.Post))
+@using (Html.BeginForm("Create", "Sales", FormMethod.Post))
 {
     @Html.ValidationSummary(true)
 
@@ -55,9 +55,6 @@
         </div>
         
     </fieldset>
-    <p>
-        <input type="button" id ="ProducteFill" />
-    </p>
     <p>
         <input type="submit" value="Create" />
     </p>

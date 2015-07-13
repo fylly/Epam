@@ -11,11 +11,11 @@ namespace MvcSalesSystem.Models
         [Display(Name = "Id")]
         public int Id { get; set; }
 
-        [Required]
+        [Required]        
         [Display(Name = "Name")]
         public string ProductName { get; set; }
 
-        [Required]
+        [Required]        
         [Display(Name = "Barcode")]
         public string Barcode { get; set; }
     }
@@ -26,10 +26,12 @@ namespace MvcSalesSystem.Models
         public int Id { get; set; }
 
         [Required]
+        [StringLength(100, ErrorMessage = "Значение \"{0}\" должно содержать не менее {2} символов.", MinimumLength = 2)]
         [Display(Name = "Name")]
         public string ProductName { get; set; }
 
         [Required]
+        [StringLength(100, ErrorMessage = "Значение \"{0}\" должно содержать не менее {2} символов.", MinimumLength = 3)]
         [Display(Name = "Barcode")]
         public string Barcode { get; set; }
     }

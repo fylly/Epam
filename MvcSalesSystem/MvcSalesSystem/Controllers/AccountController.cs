@@ -42,6 +42,48 @@ namespace MvcSalesSystem.Controllers
             return View(result);
         }
 
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public ActionResult SetRole()
+        {
+            ViewBag.Roles = new SelectList(Roles.GetAllRoles());
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_SetRolePartial");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
+        public ActionResult SetRole(SetRoleModel item)
+        {
+            var roles = new SelectList(Roles.GetAllRoles());
+            if (Membership.GetUser(item.UserName) == null)
+            {
+                ViewBag.Roles = roles;
+                ViewBag.ResultMessage = "User does not exist";
+                return View();
+            }
+            else
+            {
+                if (Roles.IsUserInRole(item.UserName, item.UserRole))
+                {
+                    ViewBag.Roles = roles;
+                    ViewBag.ResultMessage = "This user already has the role specified !";
+                    return View();
+                }
+                else
+                {
+                    foreach (var role in Roles.GetRolesForUser(item.UserName))
+                        Roles.RemoveUserFromRole(item.UserName, role);
+   
+                    Roles.AddUserToRole(item.UserName, item.UserRole);
+                    return RedirectToAction("Index", "Account");
+                }                
+            }
+        }
 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -107,6 +149,7 @@ namespace MvcSalesSystem.Controllers
                 try
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    Roles.AddUserToRole(model.UserName, "manager");
                     //WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Account");
                 }

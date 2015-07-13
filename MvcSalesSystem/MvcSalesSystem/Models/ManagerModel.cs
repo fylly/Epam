@@ -22,6 +22,7 @@ namespace MvcSalesSystem.Models
         public int Id { get; set; }
 
         [Required]
+        [StringLength(100, ErrorMessage = "Значение \"{0}\" должно содержать не менее {2} символов.", MinimumLength = 1)]
         [Display(Name = "Name")]
         public string ManagerName { get; set; }
     }

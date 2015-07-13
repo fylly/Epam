@@ -7,10 +7,9 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm("Save", "Product", FormMethod.Post))
+@using (Html.BeginForm("Create", "Product", FormMethod.Post))
 {
     @Html.ValidationSummary(true)
-
     <fieldset>
         <legend>Create Product Item</legend>
 

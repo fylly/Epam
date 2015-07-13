@@ -1,0 +1,12 @@
+﻿@model MvcSalesSystem.Models.SetRoleModel
+
+@{
+    ViewBag.Title = "SetRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SetRole</h2>
+
+<div class="message-success">@ViewBag.ResultMessage</div>
+
+@Html.Partial("_SetRolePartial", Model)
