@@ -31,8 +31,8 @@ namespace MvcSalesSystem.Controllers
             IEnumerable<ListUsers> result;
             using (var db = WebMatrix.Data.Database.Open("DefaultConnection"))
             {
-                var users = db.Query("SELECT * FROM UserProfile"); //LEFT OUTER JOIN webpages_UsersInRoles ON UserProfile.UserId = webpages_UsersInRoles.UserId");
-                result = users.Select(x => new ListUsers() { UserName = x[1], UserRole = x[1] });
+                var users = db.Query("SELECT UserProfile.UserId, UserProfile.UserName, webpages_Roles.RoleName FROM UserProfile LEFT OUTER JOIN webpages_UsersInRoles ON UserProfile.UserId = webpages_UsersInRoles.UserId LEFT OUTER JOIN webpages_Roles ON webpages_Roles.RoleId = webpages_UsersInRoles.RoleId");
+                result = users.Select(x => new ListUsers() { UserName = x[1], UserRole = x[2] });
             }
 
             if (Request.IsAjaxRequest())
