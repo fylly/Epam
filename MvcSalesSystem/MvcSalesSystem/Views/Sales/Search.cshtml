@@ -9,16 +9,16 @@
 @if (Model == null)
 {
     <div id="SearchModel">
-        @Html.Partial("_Search")
+        @Html.Partial("_SearchFormPartial")
     </div>
 }
 else
 {
     <div id="SearchModel">
-        @Html.Partial("_Search",Model.SerchForm)
+        @Html.Partial("_SearchFormPartial",Model.SerchForm)
     </div>
     <div id="listModel">
-        @Html.Partial("_SalesList", Model.ListSales)
+        @Html.Partial("_SalesListPartial", Model.ListSales)
     </div>
 
     

@@ -51,6 +51,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.DataVisualization.Design" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -166,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
@@ -180,6 +183,7 @@
     <Compile Include="ModelLayer\SalesModelContainer__\SaleItems.cs" />
     <Compile Include="ModelLayer\SalesModelContainer__\SaleItems__.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ChartModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\ManagerModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
@@ -307,16 +311,16 @@
     <Content Include="Views\Customer\Create.cshtml" />
     <Content Include="Views\Customer\Edit.cshtml" />
     <Content Include="Views\Sales\Index.cshtml" />
-    <Content Include="Views\Product\_Edit.cshtml" />
-    <Content Include="Views\Customer\_Edit.cshtml" />
-    <Content Include="Views\Sales\_EditForm.cshtml" />
+    <Content Include="Views\Product\_EditPartial.cshtml" />
+    <Content Include="Views\Customer\_EditPartial.cshtml" />
+    <Content Include="Views\Sales\_EditPartial.cshtml" />
     <Content Include="Views\Manager\Index.cshtml" />
     <Content Include="Views\Manager\Edit.cshtml" />
-    <Content Include="Views\Manager\_Edit.cshtml" />
+    <Content Include="Views\Manager\_EditPartial.cshtml" />
     <Content Include="Views\Manager\Create.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\_ProductViewModel.cshtml" />
-    <Content Include="Views\Sales\_Search.cshtml" />
-    <Content Include="Views\Sales\_SalesList.cshtml" />
+    <Content Include="Views\Sales\_SearchFormPartial.cshtml" />
+    <Content Include="Views\Sales\_SalesListPartial.cshtml" />
     <Content Include="Views\Sales\Search.cshtml" />
     <Content Include="Views\Account\GetUsers.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
@@ -324,6 +328,8 @@
     <Content Include="Views\Account\_GetUsersPartial.cshtml" />
     <Content Include="Views\Account\SetRole.cshtml" />
     <Content Include="Views\Account\_SetRolePartial.cshtml" />
+    <Content Include="Views\Chart\Index.cshtml" />
+    <Content Include="Views\Chart\_ChartFormPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -340,6 +346,9 @@
       <Project>{55889fd8-58da-4d00-876b-f3eb57292e45}</Project>
       <Name>ModelLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

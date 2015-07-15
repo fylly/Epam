@@ -134,7 +134,7 @@ namespace MvcSalesSystem.Controllers
 
                 if (Request.IsAjaxRequest())
                 {
-                    return PartialView("_EditForm", editSalesItem);
+                    return PartialView("_EditPartial", editSalesItem);
                 }
                 return View("Edit", editSalesItem);
             }
@@ -217,7 +217,7 @@ namespace MvcSalesSystem.Controllers
 
             if (Request.IsAjaxRequest())
             {
-                return PartialView("_Search");
+                return PartialView("_SearchFormPartial");
             }
             return View("Search");
         }
@@ -278,5 +278,13 @@ namespace MvcSalesSystem.Controllers
             }
             return View("Search");            
         }
+
+
+        public JsonResult AutocompleteSuggestions(string term)
+        {
+            var suggestions = _productRepository.GetAll().Where(x=> x.ProductName.Contains(term.Trim()));
+            return Json(suggestions, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

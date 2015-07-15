@@ -1,0 +1,27 @@
+﻿@model MvcSalesSystem.Models.SalesChartFormModel
+
+@using (Html.BeginForm("Index", "Chart", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Edit Sale Item</legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateStart)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DateStart)
+            @Html.ValidationMessageFor(model => model.DateStart)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateFinish)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DateFinish)
+            @Html.ValidationMessageFor(model => model.DateFinish)
+        </div>
+        
+        <p>
+            <input type="submit" value="Chart" />
+        </p>
+    </fieldset>
+}

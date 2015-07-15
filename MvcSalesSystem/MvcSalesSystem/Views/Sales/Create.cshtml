@@ -6,7 +6,9 @@
 
 
 <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.20.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
 
 <h2>Create</h2>
 
@@ -21,7 +23,7 @@
             @Html.LabelFor(model => model.Customer)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model=>model.Customer,ViewBag.Customers as SelectList)
+            @Html.DropDownListFor(model=>model.Customer,(SelectList) ViewBag.Customers)
             @Html.ValidationMessageFor(model => model.Customer)
         </div>
         <div class="editor-label">
@@ -35,7 +37,7 @@
             @Html.LabelFor(model => model.SaleDate)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.SaleDate)
+            @Html.EditorFor(model => model.SaleDate, new { id = "datepicker" })
             @Html.ValidationMessageFor(model => model.SaleDate)
         </div>
 
@@ -67,5 +69,16 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+  </script>
+
 
 }
+
+
+
+
+

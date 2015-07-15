@@ -1,0 +1,19 @@
+﻿@model MvcSalesSystem.Models.SalesChartViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+
+<div>
+    <img src="@Url.Action("GetChart")" />
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+
+

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MvcSalesSystem.Models.ListSalesItem>
 
 @{
-    ViewBag.Title = "ShowAll";
+    ViewBag.Title = "Show All";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -19,4 +19,4 @@
      | @Ajax.ActionLink("Search", "Search", new { }, new AjaxOptions() { HttpMethod = "Get", UpdateTargetId = "divSpecial", InsertionMode = InsertionMode.Replace })
 </p>
 
-@Html.Partial("_SalesList", Model)
+@Html.Partial("_SalesListPartial", Model)

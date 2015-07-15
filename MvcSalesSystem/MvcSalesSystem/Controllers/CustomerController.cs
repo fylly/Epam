@@ -53,7 +53,7 @@ namespace MvcSalesSystem.Controllers
 
             if (Request.IsAjaxRequest())
             {
-                return PartialView("_Edit", editCustomerItem);
+                return PartialView("_EditPartial", editCustomerItem);
             }
             return View("Edit", editCustomerItem);
         }
@@ -138,5 +138,8 @@ namespace MvcSalesSystem.Controllers
             }
             return View("Error");
         }
+
+
+        
     }
 }
