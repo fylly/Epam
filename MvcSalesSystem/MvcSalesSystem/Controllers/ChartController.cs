@@ -39,15 +39,7 @@ namespace MvcSalesSystem.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            IList<Tuple<double, string>> dates = _saleItemRepository.GetAll()
-                    .OrderBy(x => x.SaleDate)
-                    .GroupBy(x => new { Year = x.SaleDate.Year, Month = x.SaleDate.Month })
-                    .Select(x => new Tuple<double, string>(x.Sum(y => y.SaleSum), x.Key.Year + " - " + x.Key.Month))
-                    .ToList<Tuple<double, string>>();
-
-
-            return View(new SalesChartViewModel(){ Dates = dates });
-
+            return View();
         }
 
         [HttpPost]
@@ -55,43 +47,50 @@ namespace MvcSalesSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+                View(item);
             }
 
             return View();
         }
 
 
-        public FileContentResult GetChart()
+        public ActionResult GetChart(string GetDateStart,string GetDateFinish)
         {
-             IList<Tuple<double, string>> dates = _saleItemRepository.GetAll()
+            DateTime dateStart = Convert.ToDateTime(GetDateStart);
+            DateTime dateFinish = Convert.ToDateTime(GetDateFinish);
+            if (dateStart != null && dateFinish != null)
+            {
+                IList<Tuple<double, string>> dates = _saleItemRepository.GetAll()
+                    .Where(x=> x.SaleDate > dateStart && x.SaleDate < dateFinish)
                     .OrderBy(x => x.SaleDate)
                     .GroupBy(x => new { Year = x.SaleDate.Year, Month = x.SaleDate.Month })
                     .Select(x => new Tuple<double, string>(x.Sum(y => y.SaleSum), x.Key.Year + " - " + x.Key.Month))
                     .ToList<Tuple<double, string>>();
 
-            var chart = new Chart();
-            chart.Width = 700;
-            chart.Height = 300;
-            chart.BackColor = Color.FromArgb(211, 223, 240);
-            chart.BorderlineDashStyle = ChartDashStyle.Solid;
-            chart.BackSecondaryColor = Color.White;
-            chart.BackGradientStyle = GradientStyle.TopBottom;
-            chart.BorderlineWidth = 1;
-            chart.Palette = ChartColorPalette.BrightPastel;
-            chart.BorderlineColor = Color.FromArgb(26, 59, 105);
-            chart.RenderType = RenderType.BinaryStreaming;
-            chart.BorderSkin.SkinStyle = BorderSkinStyle.Emboss;
-            chart.AntiAliasing = AntiAliasingStyles.All;
-            chart.TextAntiAliasingQuality = TextAntiAliasingQuality.Normal;
-            chart.Titles.Add(CreateTitle());
-            chart.Legends.Add(CreateLegend());
-            chart.Series.Add(CreateSeries(dates, SeriesChartType.Line, Color.Red));
-            chart.ChartAreas.Add(CreateChartArea());
+                var chart = new Chart();
+                chart.Width = 700;
+                chart.Height = 300;
+                chart.BackColor = Color.FromArgb(211, 223, 240);
+                chart.BorderlineDashStyle = ChartDashStyle.Solid;
+                chart.BackSecondaryColor = Color.White;
+                chart.BackGradientStyle = GradientStyle.TopBottom;
+                chart.BorderlineWidth = 1;
+                chart.Palette = ChartColorPalette.BrightPastel;
+                chart.BorderlineColor = Color.FromArgb(26, 59, 105);
+                chart.RenderType = RenderType.BinaryStreaming;
+                chart.BorderSkin.SkinStyle = BorderSkinStyle.Emboss;
+                chart.AntiAliasing = AntiAliasingStyles.All;
+                chart.TextAntiAliasingQuality = TextAntiAliasingQuality.Normal;
+                chart.Titles.Add(CreateTitle());
+                chart.Legends.Add(CreateLegend());
+                chart.Series.Add(CreateSeries(dates, SeriesChartType.Line, Color.Red));
+                chart.ChartAreas.Add(CreateChartArea());
 
-            var ms = new MemoryStream();
-            chart.SaveImage(ms);
-            return File(ms.GetBuffer(), @"image/png");
+                var ms = new MemoryStream();
+                chart.SaveImage(ms);
+                return File(ms.GetBuffer(), @"image/png");
+            }
+            return View();
         }
 
         [NonAction]

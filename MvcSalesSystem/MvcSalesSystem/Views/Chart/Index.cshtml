@@ -1,4 +1,4 @@
-﻿@model MvcSalesSystem.Models.SalesChartViewModel
+﻿@model MvcSalesSystem.Models.SalesChartFormModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,10 +6,14 @@
 
 <h2>Index</h2>
 
+@Html.Partial("_ChartFormPartial", Model)
 
+@if(Model != null)
+{
 <div>
-    <img src="@Url.Action("GetChart")" />
+    <img src="@Url.Action("GetChart" , new { GetDateStart=Model.DateStart.ToString(), GetDateFinish = Model.DateFinish.ToString() })" />
 </div>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

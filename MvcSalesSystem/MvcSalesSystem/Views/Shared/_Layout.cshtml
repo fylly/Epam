@@ -22,7 +22,6 @@
                     <nav>
                         <ul id="menu">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
                             @if (Request.IsAuthenticated) {
                                 <li>@Html.ActionLink("Sales", "Index", "Sales")</li>
                                 <li>@Html.ActionLink("Products", "Index", "Product")</li>
