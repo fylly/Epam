@@ -12,6 +12,7 @@ jobs:
     environment: DEVELOP
     steps:
     - uses: actions/checkout@v3
-    - name: Node yarn ${{ matrix.node-version }}
+    - name: vars.TEST_VAR
       run: echo ${{ vars.TEST_VAR }}
-
+    - name: vars.TEST_VAR_COMMON
+      run: echo ${{ vars.TEST_VAR_COMMON }}
