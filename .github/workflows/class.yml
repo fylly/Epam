@@ -9,6 +9,7 @@ on:
 jobs:
   test:
     runs-on: Ubuntu-20.04
+    environment: DEVELOP
     steps:
     - uses: actions/checkout@v3
     - name: Node yarn ${{ matrix.node-version }}
